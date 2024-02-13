@@ -5,11 +5,11 @@ import characters from "../characters.json";
 import Slider from "@mui/material/Slider";
 import TextField from "@mui/material/TextField";
 //import Button from "@mui/material/Button";
-import Switch from "@mui/material/Switch";
+//import Switch from "@mui/material/Switch";
 import Picker from "../components/Picker";
 import Info from "../components/Info";
 import log from "../utils/log";
-import {Button} from '@radix-ui/themes';
+import {Button,Switch} from '@radix-ui/themes';
 
 const { ClipboardItem } = window;
 
@@ -117,10 +117,20 @@ function App() {
     const canvas = document.getElementsByTagName("canvas")[0];
     const link = document.createElement("a");
     link.download = `${characters[character].name}_generated.png`;
-    link.href = canvas.toDataURL();
+    link.href = canvas.toDataURL('image/png');
     link.click();
-    await log(characters[character].id, characters[character].name, "download");
-    setRand(rand + 1);
+  };
+
+  const downloadWebp = async () => {
+    // resize height to 512px
+    const canvas = document.getElementsByTagName("canvas")[0];
+    const ctx = canvas.getContext('2d');
+    const ratio = 512 / canvas.height;
+    ctx.scale(ratio, ratio);
+    const link = document.createElement("a");
+    link.download = `${characters[character].name}_generated.webp`;
+    link.href = canvas.toDataURL('image/webp');
+    link.click();
   };
 
   const downloadJpg = async () => {
@@ -139,9 +149,7 @@ function App() {
     link.download = `${characters[character].name}_generated.jpg`;
     link.href = imageData;
     link.click();
-    await log(characters[character].id, characters[character].name, "download");
-    setRand(rand + 1);
-  }
+  };
 
   function b64toBlob(b64Data, contentType = null, sliceSize = null) {
     contentType = contentType || "image/png";
@@ -173,7 +181,6 @@ function App() {
 
   return (
     <div className="App font-sans">
-      <Info open={infoOpen} handleClose={handleClose} />
       <div className="container">
         <div className="vertical">
           <div className="canvas">
@@ -250,8 +257,7 @@ function App() {
             <div>
               <label>Curve (Beta): </label>
               <Switch
-                checked={curve}
-                onChange={(e) => setCurve(e.target.checked)}
+                onClick={() => setCurve(!curve)}
                 color="secondary"
               />
             </div>
@@ -277,17 +283,18 @@ function App() {
           </div>
           <div className="buttons">
             <Button size="3" variant="soft" onClick={download}>
-              Download PNG
+              Save PNG
             </Button>
             <Button size="3" variant="soft" onClick={downloadJpg}>
-              Download JPG
+              Save JPG
+            </Button>
+            <Button size="3" variant="soft" onClick={downloadWebp}>
+              Save Webp
             </Button>
           </div>
         </div>
         <div className="footer">
-          <Button size="3" color="secondary" onClick={handleClickOpen}>
-            INFO
-          </Button>
+          <Info />
         </div>
       </div>
     </div>

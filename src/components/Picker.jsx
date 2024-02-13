@@ -8,6 +8,7 @@ import {
 import { useState, useMemo } from "react";
 import characters from "../characters.json";
 
+// eslint-disable-next-line react/prop-types
 export default function Picker({ setCharacter }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [search, setSearch] = useState("");

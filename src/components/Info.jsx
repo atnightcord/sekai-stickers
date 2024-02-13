@@ -11,7 +11,8 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 
-export default function Info({ open, handleClose, config }) {
+// eslint-disable-next-line react/prop-types
+export default function Info({ open, handleClose }) {
   return (
     <div>
       <Dialog

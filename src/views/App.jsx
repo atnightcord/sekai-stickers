@@ -4,11 +4,12 @@ import { useState, useEffect } from "react";
 import characters from "../characters.json";
 import Slider from "@mui/material/Slider";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+//import Button from "@mui/material/Button";
 import Switch from "@mui/material/Switch";
 import Picker from "../components/Picker";
 import Info from "../components/Info";
 import log from "../utils/log";
+import {Button} from '@radix-ui/themes';
 
 const { ClipboardItem } = window;
 
@@ -115,12 +116,32 @@ function App() {
   const download = async () => {
     const canvas = document.getElementsByTagName("canvas")[0];
     const link = document.createElement("a");
-    link.download = `${characters[character].name}_st.ayaka.one.png`;
+    link.download = `${characters[character].name}_generated.png`;
     link.href = canvas.toDataURL();
     link.click();
     await log(characters[character].id, characters[character].name, "download");
     setRand(rand + 1);
   };
+
+  const downloadJpg = async () => {
+    const canvas = document.getElementsByTagName("canvas")[0];
+    const ctx = canvas.getContext("2d");
+    const data = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const compositeOperation = ctx.globalCompositeOperation;
+    ctx.globalCompositeOperation = "destination-over";
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const imageData = canvas.toDataURL("image/jpeg");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.putImageData(data, 0, 0);
+    ctx.globalCompositeOperation = compositeOperation;
+    const link = document.createElement("a");
+    link.download = `${characters[character].name}_generated.jpg`;
+    link.href = imageData;
+    link.click();
+    await log(characters[character].id, characters[character].name, "download");
+    setRand(rand + 1);
+  }
 
   function b64toBlob(b64Data, contentType = null, sliceSize = null) {
     contentType = contentType || "image/png";
@@ -250,17 +271,22 @@ function App() {
             <Picker setCharacter={setCharacter} />
           </div>
           <div className="buttons">
-            <Button color="secondary" onClick={copy}>
-              copy
+            <Button size="3" variant="soft" onClick={copy}>
+              Copy
             </Button>
-            <Button color="secondary" onClick={download}>
-              download
+          </div>
+          <div className="buttons">
+            <Button size="3" variant="soft" onClick={download}>
+              Download PNG
+            </Button>
+            <Button size="3" variant="soft" onClick={downloadJpg}>
+              Download JPG
             </Button>
           </div>
         </div>
         <div className="footer">
-          <Button color="secondary" onClick={handleClickOpen}>
-            Info
+          <Button size="3" color="secondary" onClick={handleClickOpen}>
+            INFO
           </Button>
         </div>
       </div>

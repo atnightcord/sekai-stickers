@@ -2,9 +2,9 @@ import {
   ImageList,
   ImageListItem,
   Popover,
-  Button,
   TextField,
 } from "@mui/material";
+import {Button} from '@radix-ui/themes';
 import { useState, useMemo } from "react";
 import characters from "../characters.json";
 
@@ -68,7 +68,7 @@ export default function Picker({ setCharacter }) {
     <div>
       <Button
         aria-describedby={id}
-        variant="contained"
+        size="3"
         color="secondary"
         onClick={handleClick}
       >

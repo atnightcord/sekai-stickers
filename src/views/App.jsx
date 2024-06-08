@@ -179,6 +179,27 @@ function App() {
     setRand(rand + 1);
   };
 
+  const copyWithBg = async () => {
+    const canvas = document.getElementsByTagName("canvas")[0];
+    const ctx = canvas.getContext("2d");
+    const data = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const compositeOperation = ctx.globalCompositeOperation;
+    ctx.globalCompositeOperation = "destination-over";
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const imageData = canvas.toDataURL("image/jpeg");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.putImageData(data, 0, 0);
+    ctx.globalCompositeOperation = compositeOperation;
+    await navigator.clipboard.write([
+      new ClipboardItem({
+        "image/png": b64toBlob(imageData.split(",")[1]),
+      }),
+    ]);
+    await log(characters[character].id, characters[character].name, "copy");
+    setRand(rand + 1);
+  };
+
   return (
     <div className="App font-sans">
       <div className="container">
@@ -276,12 +297,13 @@ function App() {
           <div className="picker">
             <Picker setCharacter={setCharacter} />
           </div>
-          <div className="buttons">
+          <div className="grid grid-cols-2 gap-2 py-2">
             <Button size="3" variant="soft" onClick={copy}>
-              Copy
+              Copy PNG
             </Button>
-          </div>
-          <div className="buttons">
+            <Button size="3" variant="soft" onClick={copyWithBg}>
+              Copy JPG
+            </Button>
             <Button size="3" variant="soft" onClick={download}>
               Save PNG
             </Button>
@@ -289,7 +311,7 @@ function App() {
               Save JPG
             </Button>
             <Button size="3" variant="soft" onClick={downloadWebp}>
-              Save Webp
+              Save WEBP
             </Button>
           </div>
         </div>

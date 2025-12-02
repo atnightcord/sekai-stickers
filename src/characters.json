@@ -5559,6 +5559,20 @@
     },
     {
         "id": "413",
+        "name": "Madoka 12",
+        "character": "Madoka",
+        "img": "Madoka/emo_e20000101_945.png",
+        "color": "#be1e3e",
+        "defaultText": {
+            "text": "something",
+            "x": 148,
+            "y": 58,
+            "r": -2,
+            "s": 47
+        }
+    },
+    {
+        "id": "414",
         "name": "Toru 00",
         "character": "Toru",
         "img": "Toru/emo_e20000100_0.png",
@@ -5572,7 +5586,7 @@
         }
     },
     {
-        "id": "414",
+        "id": "415",
         "name": "Toru 01",
         "character": "Toru",
         "img": "Toru/emo_e20000100_1.png",
@@ -5586,7 +5600,7 @@
         }
     },
     {
-        "id": "415",
+        "id": "416",
         "name": "Toru 02",
         "character": "Toru",
         "img": "Toru/emo_e20000100_10.png",
@@ -5600,7 +5614,7 @@
         }
     },
     {
-        "id": "416",
+        "id": "417",
         "name": "Toru 03",
         "character": "Toru",
         "img": "Toru/emo_e20000100_11.png",
@@ -5614,7 +5628,7 @@
         }
     },
     {
-        "id": "417",
+        "id": "418",
         "name": "Toru 04",
         "character": "Toru",
         "img": "Toru/emo_e20000100_12.png",
@@ -5628,7 +5642,7 @@
         }
     },
     {
-        "id": "418",
+        "id": "419",
         "name": "Toru 05",
         "character": "Toru",
         "img": "Toru/emo_e20000100_2.png",
@@ -5642,7 +5656,7 @@
         }
     },
     {
-        "id": "419",
+        "id": "420",
         "name": "Toru 06",
         "character": "Toru",
         "img": "Toru/emo_e20000100_3.png",
@@ -5656,7 +5670,7 @@
         }
     },
     {
-        "id": "420",
+        "id": "421",
         "name": "Toru 07",
         "character": "Toru",
         "img": "Toru/emo_e20000100_4.png",
@@ -5670,7 +5684,7 @@
         }
     },
     {
-        "id": "421",
+        "id": "422",
         "name": "Toru 08",
         "character": "Toru",
         "img": "Toru/emo_e20000100_5.png",
@@ -5684,7 +5698,7 @@
         }
     },
     {
-        "id": "422",
+        "id": "423",
         "name": "Toru 09",
         "character": "Toru",
         "img": "Toru/emo_e20000100_6.png",
@@ -5698,7 +5712,7 @@
         }
     },
     {
-        "id": "423",
+        "id": "424",
         "name": "Toru 10",
         "character": "Toru",
         "img": "Toru/emo_e20000100_7.png",
@@ -5712,7 +5726,7 @@
         }
     },
     {
-        "id": "424",
+        "id": "425",
         "name": "Toru 11",
         "character": "Toru",
         "img": "Toru/emo_e20000100_8.png",
@@ -5726,7 +5740,7 @@
         }
     },
     {
-        "id": "425",
+        "id": "426",
         "name": "Toru 12",
         "character": "Toru",
         "img": "Toru/emo_e20000100_945.png",

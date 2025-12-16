@@ -149,68 +149,68 @@ function App() {
   const draw = (ctx) => {
     ctx.canvas.width = 296;
     ctx.canvas.height = 256;
+    if (!loaded) return;
 
-    if (loaded && document.fonts.check("12px YurukaStd")) {
-      var hRatio = ctx.canvas.width / img.width;
-      var vRatio = ctx.canvas.height / img.height;
-      var ratio = Math.min(hRatio, vRatio);
-      var centerShift_x = (ctx.canvas.width - img.width * ratio) / 2;
-      var centerShift_y = (ctx.canvas.height - img.height * ratio) / 2;
-      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-      ctx.drawImage(
-        img,
-        0,
-        0,
-        img.width,
-        img.height,
-        centerShift_x,
-        centerShift_y,
-        img.width * ratio,
-        img.height * ratio
-      );
-      ctx.font = `${fontSize}px YurukaStd, SSFangTangTi`;
-      ctx.lineWidth = strokeWidth;
-      ctx.save();
+    var hRatio = ctx.canvas.width / img.width;
+    var vRatio = ctx.canvas.height / img.height;
+    var ratio = Math.min(hRatio, vRatio);
+    var centerShift_x = (ctx.canvas.width - img.width * ratio) / 2;
+    var centerShift_y = (ctx.canvas.height - img.height * ratio) / 2;
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.drawImage(
+      img,
+      0,
+      0,
+      img.width,
+      img.height,
+      centerShift_x,
+      centerShift_y,
+      img.width * ratio,
+      img.height * ratio
+    );
 
-      ctx.translate(position.x, position.y);
-      ctx.rotate(rotate / 10);
-      ctx.textAlign = "center";
-      ctx.strokeStyle = strokeColor;
-      ctx.fillStyle = textColor;
-      const lines = text.split("\n");
-      if (curve) {
-        for (let line of lines) {
-          for (let i = 0; i < line.length; i++) {
-            ctx.rotate(angle / line.length / 2.5);
-            ctx.save();
-            ctx.translate(0, -1 * fontSize * 3.5);
-            ctx.strokeText(line[i], 0, 0);
-            ctx.fillText(line[i], 0, 0);
-            ctx.restore();
-          }
-        }
-      } else if (vertical) {
-        const letterStep = fontSize; // character step along Y
-        const lineStep = fontSize + spaceSize - 40; // next column offset along X
-        let xOffset = 0;
-        for (const line of lines) {
-          let yOffset = 0;
-          for (let i = 0; i < line.length; i++) {
-            ctx.strokeText(line[i], xOffset, yOffset);
-            ctx.fillText(line[i], xOffset, yOffset);
-            yOffset += letterStep;
-          }
-          xOffset += lineStep;
-        }
-      } else {
-        for (let i = 0, k = 0; i < lines.length; i++) {
-          ctx.strokeText(lines[i], 0, k);
-          ctx.fillText(lines[i], 0, k);
-          k += spaceSize;
+    ctx.font = `${fontSize}px YurukaStd, SSFangTangTi, sans-serif`;
+    ctx.lineWidth = strokeWidth;
+    ctx.save();
+
+    ctx.translate(position.x, position.y);
+    ctx.rotate(rotate / 10);
+    ctx.textAlign = "center";
+    ctx.strokeStyle = strokeColor;
+    ctx.fillStyle = textColor;
+    const lines = text.split("\n");
+    if (curve) {
+      for (let line of lines) {
+        for (let i = 0; i < line.length; i++) {
+          ctx.rotate(angle / line.length / 2.5);
+          ctx.save();
+          ctx.translate(0, -1 * fontSize * 3.5);
+          ctx.strokeText(line[i], 0, 0);
+          ctx.fillText(line[i], 0, 0);
+          ctx.restore();
         }
       }
-      ctx.restore();
+    } else if (vertical) {
+      const letterStep = fontSize; // character step along Y
+      const lineStep = fontSize + spaceSize - 40; // next column offset along X
+      let xOffset = 0;
+      for (const line of lines) {
+        let yOffset = 0;
+        for (let i = 0; i < line.length; i++) {
+          ctx.strokeText(line[i], xOffset, yOffset);
+          ctx.fillText(line[i], xOffset, yOffset);
+          yOffset += letterStep;
+        }
+        xOffset += lineStep;
+      }
+    } else {
+      for (let i = 0, k = 0; i < lines.length; i++) {
+        ctx.strokeText(lines[i], 0, k);
+        ctx.fillText(lines[i], 0, k);
+        k += spaceSize;
+      }
     }
+    ctx.restore();
   };
 
   const download = async () => {
@@ -341,6 +341,20 @@ function App() {
             color="secondary"
           />
           <div className="settings settingsitems">
+            <div className="picker">
+              <Picker setCharacter={handleCharacterSelect} />
+            </div>
+            <div className="text">
+              <TextField
+                label="Text"
+                size="small"
+                color="secondary"
+                value={text}
+                multiline={true}
+                fullWidth
+                onChange={(e) => setText(e.target.value)}
+              />
+            </div>
             <div>
               <label>Rotate: </label>
               <Slider
@@ -479,21 +493,6 @@ function App() {
                 Reset All
               </Button>
             </div>
-          </div>
-          <div className="text">
-            <TextField
-              label="Text"
-              size="small"
-              color="secondary"
-              value={text}
-              multiline={true}
-              fullWidth
-              onChange={(e) => setText(e.target.value)}
-            />
-          </div>
-
-          <div className="picker">
-            <Picker setCharacter={handleCharacterSelect} />
           </div>
           <div className="grid grid-cols-2 gap-2 py-2">
             <Button size="3" variant="soft" onClick={copy}>

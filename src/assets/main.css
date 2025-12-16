@@ -9,6 +9,7 @@
   height: 256px;
   width: 296px;
   border: 1px solid #ddd;
+  font-family: "YurukaStd", "SSFangTangTi";
 }
 
 .vertical {
@@ -29,7 +30,7 @@
 
 .settings {
   color: black;
-  font-family: "YurukaStd", "SSFangTangTi";
+  /* font-family: "YurukaStd", "SSFangTangTi"; */
   margin: 1.5rem 0 1.5rem 0;
 }
 

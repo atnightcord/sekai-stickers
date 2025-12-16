@@ -17,7 +17,7 @@ const question = (query) =>
 
 async function main() {
   try {
-    const charactersPath = path.resolve(__dirname, "../src/characters.json");
+    const charactersPath = path.resolve(__dirname, "../src/characters-sc.json");
     const publicImgPath = path.resolve(__dirname, "../public/img");
 
     // 1. Read characters.json

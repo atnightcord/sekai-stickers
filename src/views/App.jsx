@@ -33,12 +33,39 @@ function App() {
   const [strokeWidth, setStrokeWidth] = useState(DEFAULT_STROKE_WIDTH);
   const [strokeColor, setStrokeColor] = useState("#ffffff");
   const [loaded, setLoaded] = useState(false);
+  const [customImage, setCustomImage] = useState(null);
   const isDragging = useRef(false);
   const lastPos = useRef({ x: 0, y: 0 });
+  const fileInputRef = useRef(null);
   const img = new Image();
 
   const handleCharacterSelect = (selectedCharacter) => {
     setCharacter(selectedCharacter);
+  };
+
+  const handleUpload = (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const result = ev.target && ev.target.result;
+      if (typeof result === "string") {
+        setLoaded(false);
+        setCustomImage(result);
+        if (fileInputRef.current) fileInputRef.current.value = "";
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const clearUpload = () => {
+    setLoaded(false);
+    setCustomImage(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  const triggerUpload = () => {
+    if (fileInputRef.current) fileInputRef.current.click();
   };
 
   const getPoint = (e) => {
@@ -111,7 +138,7 @@ function App() {
     setLoaded(false);
   }, [character]);
 
-  img.src = "/img/" + character.img;
+  img.src = customImage ?? "/img/" + character.img;
 
   img.onload = () => {
     setLoaded(true);
@@ -412,6 +439,35 @@ function App() {
               >
                 Reset
               </Button>
+            </div>
+            <div className="flex items-center gap-2">
+              <label>Custom image: </label>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleUpload}
+                aria-label="Custom image upload"
+                style={{ display: "none" }}
+              />
+              <Button
+                size="2"
+                variant="soft"
+                color="secondary"
+                onClick={triggerUpload}
+              >
+                Upload
+              </Button>
+              {customImage && (
+                <Button
+                  size="2"
+                  variant="soft"
+                  color="secondary"
+                  onClick={clearUpload}
+                >
+                  Clear
+                </Button>
+              )}
             </div>
             <div className="flex items-center gap-2">
               <Button

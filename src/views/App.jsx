@@ -1,6 +1,6 @@
 import "../assets/main.css";
 import Canvas from "../components/Canvas";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import characters from "../characters.json";
 import Slider from "@mui/material/Slider";
 import TextField from "@mui/material/TextField";
@@ -9,7 +9,7 @@ import TextField from "@mui/material/TextField";
 import Picker from "../components/Picker";
 import Info from "../components/Info";
 import log from "../utils/log";
-import {Button,Switch} from '@radix-ui/themes';
+import { Button, Switch } from "@radix-ui/themes";
 
 const { ClipboardItem } = window;
 
@@ -17,41 +17,77 @@ function App() {
   // using this to trigger the useEffect because lazy to think of a better way
   const [rand, setRand] = useState(0);
 
-  const [infoOpen, setInfoOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setInfoOpen(true);
-  };
-
-  const handleClose = () => {
-    setInfoOpen(false);
-  };
-
-  const [character, setCharacter] = useState(49);
-  const [text, setText] = useState(characters[character].defaultText.text);
+  const [character, setCharacter] = useState(characters[49]);
+  const [text, setText] = useState(character.defaultText.text);
   const [position, setPosition] = useState({
-    x: characters[character].defaultText.x,
-    y: characters[character].defaultText.y,
+    x: character.defaultText.x,
+    y: character.defaultText.y,
   });
-  const [fontSize, setFontSize] = useState(characters[character].defaultText.s);
+  const [fontSize, setFontSize] = useState(character.defaultText.s);
   const [spaceSize, setSpaceSize] = useState(1);
-  const [rotate, setRotate] = useState(characters[character].defaultText.r);
+  const [rotate, setRotate] = useState(character.defaultText.r);
   const [curve, setCurve] = useState(false);
+  const [vertical, setVertical] = useState(false);
+  const [textColor, setTextColor] = useState(character.color);
   const [loaded, setLoaded] = useState(false);
+  const isDragging = useRef(false);
+  const lastPos = useRef({ x: 0, y: 0 });
   const img = new Image();
 
+  const handleCharacterSelect = (selectedCharacter) => {
+    setCharacter(selectedCharacter);
+  };
+
+  const getPoint = (e) => {
+    if (e.touches && e.touches[0]) {
+      return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }
+    return { x: e.clientX, y: e.clientY };
+  };
+
+  const handlePointerDown = (e) => {
+    const { x, y } = getPoint(e);
+    isDragging.current = true;
+    lastPos.current = { x, y };
+    if (e.cancelable) {
+      e.preventDefault();
+    }
+  };
+
+  const handlePointerMove = (e) => {
+    if (!isDragging.current) return;
+    const { x, y } = getPoint(e);
+    const dx = x - lastPos.current.x;
+    const dy = y - lastPos.current.y;
+    if (dx !== 0 || dy !== 0) {
+      setPosition((prev) => ({ x: prev.x + dx, y: prev.y + dy }));
+      lastPos.current = { x, y };
+    }
+    if (e.cancelable) {
+      e.preventDefault();
+    }
+  };
+
+  const handlePointerUp = (e) => {
+    isDragging.current = false;
+    if (e && e.cancelable) {
+      e.preventDefault();
+    }
+  };
+
   useEffect(() => {
-    setText(characters[character].defaultText.text);
+    setText(character.defaultText.text);
     setPosition({
-      x: characters[character].defaultText.x,
-      y: characters[character].defaultText.y,
+      x: character.defaultText.x,
+      y: character.defaultText.y,
     });
-    setRotate(characters[character].defaultText.r);
-    setFontSize(characters[character].defaultText.s);
+    setRotate(character.defaultText.r);
+    setFontSize(character.defaultText.s);
+    setTextColor(character.color);
     setLoaded(false);
   }, [character]);
 
-  img.src = "/img/" + characters[character].img;
+  img.src = "/img/" + character.img;
 
   img.onload = () => {
     setLoaded(true);
@@ -89,8 +125,8 @@ function App() {
       ctx.rotate(rotate / 10);
       ctx.textAlign = "center";
       ctx.strokeStyle = "white";
-      ctx.fillStyle = characters[character].color;
-      var lines = text.split("\n");
+      ctx.fillStyle = textColor;
+      const lines = text.split("\n");
       if (curve) {
         for (let line of lines) {
           for (let i = 0; i < line.length; i++) {
@@ -102,34 +138,47 @@ function App() {
             ctx.restore();
           }
         }
+      } else if (vertical) {
+        const letterStep = fontSize + spaceSize; // character step along Y
+        const lineStep = fontSize + spaceSize; // next column offset along X
+        let xOffset = 0;
+        for (const line of lines) {
+          let yOffset = 0;
+          for (let i = 0; i < line.length; i++) {
+            ctx.strokeText(line[i], xOffset, yOffset);
+            ctx.fillText(line[i], xOffset, yOffset);
+            yOffset += letterStep;
+          }
+          xOffset += lineStep;
+        }
       } else {
-        for (var i = 0, k = 0; i < lines.length; i++) {
+        for (let i = 0, k = 0; i < lines.length; i++) {
           ctx.strokeText(lines[i], 0, k);
           ctx.fillText(lines[i], 0, k);
           k += spaceSize;
         }
-        ctx.restore();
       }
+      ctx.restore();
     }
   };
 
   const download = async () => {
     const canvas = document.getElementsByTagName("canvas")[0];
     const link = document.createElement("a");
-    link.download = `${characters[character].name}_generated.png`;
-    link.href = canvas.toDataURL('image/png');
+    link.download = `${character.name}_generated.png`;
+    link.href = canvas.toDataURL("image/png");
     link.click();
   };
 
   const downloadWebp = async () => {
     // resize height to 512px
     const canvas = document.getElementsByTagName("canvas")[0];
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     const ratio = 512 / canvas.height;
     ctx.scale(ratio, ratio);
     const link = document.createElement("a");
-    link.download = `${characters[character].name}_generated.webp`;
-    link.href = canvas.toDataURL('image/webp');
+    link.download = `${character.name}_generated.webp`;
+    link.href = canvas.toDataURL("image/webp");
     link.click();
   };
 
@@ -146,7 +195,7 @@ function App() {
     ctx.putImageData(data, 0, 0);
     ctx.globalCompositeOperation = compositeOperation;
     const link = document.createElement("a");
-    link.download = `${characters[character].name}_generated.jpg`;
+    link.download = `${character.name}_generated.jpg`;
     link.href = imageData;
     link.click();
   };
@@ -175,7 +224,7 @@ function App() {
         "image/png": b64toBlob(canvas.toDataURL().split(",")[1]),
       }),
     ]);
-    await log(characters[character].id, characters[character].name, "copy");
+    await log(character.id, character.name, "copy");
     setRand(rand + 1);
   };
 
@@ -196,7 +245,7 @@ function App() {
         "image/png": b64toBlob(imageData.split(",")[1]),
       }),
     ]);
-    await log(characters[character].id, characters[character].name, "copy");
+    await log(character.id, character.name, "copy");
     setRand(rand + 1);
   };
 
@@ -205,7 +254,13 @@ function App() {
       <div className="container">
         <div className="vertical">
           <div className="canvas">
-            <Canvas draw={draw} />
+            <Canvas
+              draw={draw}
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={handlePointerUp}
+              onPointerLeave={handlePointerUp}
+            />
           </div>
           <Slider
             value={curve ? 256 - position.y + fontSize * 3 : 256 - position.y}
@@ -277,10 +332,31 @@ function App() {
             </div>
             <div>
               <label>Curve (Beta): </label>
+              <Switch onClick={() => setCurve(!curve)} color="secondary" />
+            </div>
+            <div>
+              <label>Vertical text: </label>
               <Switch
-                onClick={() => setCurve(!curve)}
+                onClick={() => setVertical(!vertical)}
                 color="secondary"
               />
+            </div>
+            <div className="flex items-center gap-2">
+              <label>Text color: </label>
+              <input
+                type="color"
+                value={textColor}
+                onChange={(e) => setTextColor(e.target.value)}
+                aria-label="Text color"
+              />
+              <Button
+                size="2"
+                variant="soft"
+                color="secondary"
+                onClick={() => setTextColor(character.color)}
+              >
+                Reset
+              </Button>
             </div>
           </div>
           <div className="text">
@@ -294,8 +370,9 @@ function App() {
               onChange={(e) => setText(e.target.value)}
             />
           </div>
+
           <div className="picker">
-            <Picker setCharacter={setCharacter} />
+            <Picker setCharacter={handleCharacterSelect} />
           </div>
           <div className="grid grid-cols-2 gap-2 py-2">
             <Button size="3" variant="soft" onClick={copy}>

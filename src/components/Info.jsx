@@ -51,6 +51,12 @@ export default function Info() {
                   https://github.com/atnightcord/sekai-stickers
                 </Link>
               </Text>
+              <Text as="div" size="2" style={{ maxWidth: 300 }} mt="3">
+                Stickers are collected from the community. If there is any
+                infringement, please contact me for removal. If you would like
+                to contribute stickers, please submit an issue or PR via the
+                GitHub link above.
+              </Text>
             </Box>
           </Flex>
         </Popover.Content>

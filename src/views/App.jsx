@@ -41,6 +41,8 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const [customImage, setCustomImage] = useState(null);
   const [fontKey, setFontKey] = useState(DEFAULT_FONT_KEY);
+  const [textBehind, setTextBehind] = useState(false);
+  const [letterSpacing, setLetterSpacing] = useState(0);
   const isDragging = useRef(false);
   const lastPos = useRef({ x: 0, y: 0 });
   const fileInputRef = useRef(null);
@@ -127,6 +129,8 @@ function App() {
     setStrokeColor("#ffffff");
     setStrokeWidth(DEFAULT_STROKE_WIDTH);
     setFontKey(DEFAULT_FONT_KEY);
+    setTextBehind(false);
+    setLetterSpacing(0);
   };
 
   useEffect(() => {
@@ -154,29 +158,7 @@ function App() {
 
   let angle = (Math.PI * text.length) / 7;
 
-  const draw = (ctx) => {
-    ctx.canvas.width = 296;
-    ctx.canvas.height = 256;
-    if (!loaded) return;
-
-    var hRatio = ctx.canvas.width / img.width;
-    var vRatio = ctx.canvas.height / img.height;
-    var ratio = Math.min(hRatio, vRatio);
-    var centerShift_x = (ctx.canvas.width - img.width * ratio) / 2;
-    var centerShift_y = (ctx.canvas.height - img.height * ratio) / 2;
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.drawImage(
-      img,
-      0,
-      0,
-      img.width,
-      img.height,
-      centerShift_x,
-      centerShift_y,
-      img.width * ratio,
-      img.height * ratio
-    );
-
+  const drawText = (ctx) => {
     ctx.font = `${fontSize}px ${FONT_STACKS[fontKey]}`;
     ctx.lineWidth = strokeWidth;
     ctx.save();
@@ -199,7 +181,7 @@ function App() {
         }
       }
     } else if (vertical) {
-      const letterStep = fontSize; // character step along Y
+      const letterStep = fontSize + letterSpacing; // character step along Y with spacing
       const lineStep = fontSize + spaceSize - 40; // next column offset along X
       let xOffset = 0;
       for (const line of lines) {
@@ -212,13 +194,68 @@ function App() {
         xOffset += lineStep;
       }
     } else {
-      for (let i = 0, k = 0; i < lines.length; i++) {
-        ctx.strokeText(lines[i], 0, k);
-        ctx.fillText(lines[i], 0, k);
-        k += spaceSize;
+      // Horizontal text with character spacing support
+      if (letterSpacing === 0) {
+        // Original logic for no letter spacing
+        for (let i = 0, k = 0; i < lines.length; i++) {
+          ctx.strokeText(lines[i], 0, k);
+          ctx.fillText(lines[i], 0, k);
+          k += spaceSize;
+        }
+      } else {
+        // Character-by-character rendering with letter spacing
+        ctx.textAlign = "left";
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          const lineY = i * spaceSize;
+          const metrics = ctx.measureText(line);
+          let charX = -metrics.width / 2;
+          for (let j = 0; j < line.length; j++) {
+            ctx.strokeText(line[j], charX, lineY);
+            ctx.fillText(line[j], charX, lineY);
+            const charMetrics = ctx.measureText(line[j]);
+            charX += charMetrics.width + letterSpacing;
+          }
+        }
+        ctx.textAlign = "center"; // Reset alignment
       }
     }
     ctx.restore();
+  };
+
+  const draw = (ctx) => {
+    ctx.canvas.width = 296;
+    ctx.canvas.height = 256;
+    if (!loaded) return;
+
+    var hRatio = ctx.canvas.width / img.width;
+    var vRatio = ctx.canvas.height / img.height;
+    var ratio = Math.min(hRatio, vRatio);
+    var centerShift_x = (ctx.canvas.width - img.width * ratio) / 2;
+    var centerShift_y = (ctx.canvas.height - img.height * ratio) / 2;
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+    if (textBehind) {
+      // Draw text first, then image on top
+      drawText(ctx);
+    }
+
+    ctx.drawImage(
+      img,
+      0,
+      0,
+      img.width,
+      img.height,
+      centerShift_x,
+      centerShift_y,
+      img.width * ratio,
+      img.height * ratio
+    );
+
+    if (!textBehind) {
+      // Draw text on top of image (default)
+      drawText(ctx);
+    }
   };
 
   const download = async () => {
@@ -418,6 +455,20 @@ function App() {
             </div>
             <div>
               <label>
+                <nobr>Letter spacing: </nobr>
+              </label>
+              <Slider
+                value={letterSpacing}
+                onChange={(e, v) => setLetterSpacing(v)}
+                min={-10}
+                max={30}
+                step={1}
+                track={false}
+                color="secondary"
+              />
+            </div>
+            <div>
+              <label>
                 <nobr>Stroke width: </nobr>
               </label>
               <Slider
@@ -438,6 +489,13 @@ function App() {
               <label>Vertical text: </label>
               <Switch
                 onClick={() => setVertical(!vertical)}
+                color="secondary"
+              />
+            </div>
+            <div>
+              <label>Text behind image: </label>
+              <Switch
+                onClick={() => setTextBehind(!textBehind)}
                 color="secondary"
               />
             </div>

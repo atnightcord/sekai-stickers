@@ -9,10 +9,16 @@ import TextField from "@mui/material/TextField";
 import Picker from "../components/Picker";
 import Info from "../components/Info";
 import log from "../utils/log";
-import { Button, Switch } from "@radix-ui/themes";
+import { Button, Switch, Select } from "@radix-ui/themes";
 
 const { ClipboardItem } = window;
 const DEFAULT_STROKE_WIDTH = 9;
+const FONT_STACKS = {
+  yuruka: "YurukaStd, SSFangTangTi, sans-serif",
+  fangtang: "SSFangTangTi, sans-serif",
+  system: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+};
+const DEFAULT_FONT_KEY = "yuruka";
 
 function App() {
   // using this to trigger the useEffect because lazy to think of a better way
@@ -34,6 +40,7 @@ function App() {
   const [strokeColor, setStrokeColor] = useState("#ffffff");
   const [loaded, setLoaded] = useState(false);
   const [customImage, setCustomImage] = useState(null);
+  const [fontKey, setFontKey] = useState(DEFAULT_FONT_KEY);
   const isDragging = useRef(false);
   const lastPos = useRef({ x: 0, y: 0 });
   const fileInputRef = useRef(null);
@@ -119,6 +126,7 @@ function App() {
     setTextColor(character.color);
     setStrokeColor("#ffffff");
     setStrokeWidth(DEFAULT_STROKE_WIDTH);
+    setFontKey(DEFAULT_FONT_KEY);
   };
 
   useEffect(() => {
@@ -169,7 +177,7 @@ function App() {
       img.height * ratio
     );
 
-    ctx.font = `${fontSize}px YurukaStd, SSFangTangTi, sans-serif`;
+    ctx.font = `${fontSize}px ${FONT_STACKS[fontKey]}`;
     ctx.lineWidth = strokeWidth;
     ctx.save();
 
@@ -354,6 +362,19 @@ function App() {
                 fullWidth
                 onChange={(e) => setText(e.target.value)}
               />
+            </div>
+            <div>
+              <label>
+                <nobr>Font: </nobr>
+              </label>
+              <Select.Root value={fontKey} onValueChange={setFontKey}>
+                <Select.Trigger />
+                <Select.Content>
+                  <Select.Item value="yuruka">YurukaStd</Select.Item>
+                  <Select.Item value="fangtang">SSFangTangTi</Select.Item>
+                  <Select.Item value="system">System Sans</Select.Item>
+                </Select.Content>
+              </Select.Root>
             </div>
             <div>
               <label>Rotate: </label>

@@ -1,8 +1,7 @@
 import "../assets/main.css";
 import Canvas from "../components/Canvas";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import characters from "../characters.json";
-import charactersSC from "../characters-sc.json";
 import Slider from "@mui/material/Slider";
 import TextField from "@mui/material/TextField";
 //import Button from "@mui/material/Button";
@@ -13,7 +12,6 @@ import log from "../utils/log";
 import { Button, Switch } from "@radix-ui/themes";
 
 const { ClipboardItem } = window;
-const STORAGE_KEY = "sekai-stickers-settings";
 const DEFAULT_STROKE_WIDTH = 9;
 
 function App() {
@@ -21,14 +19,13 @@ function App() {
   const [rand, setRand] = useState(0);
 
   const [character, setCharacter] = useState(characters[49]);
-  const [characterSource, setCharacterSource] = useState("primary");
   const [text, setText] = useState(character.defaultText.text);
   const [position, setPosition] = useState({
     x: character.defaultText.x,
     y: character.defaultText.y,
   });
   const [fontSize, setFontSize] = useState(character.defaultText.s);
-  const [spaceSize, setSpaceSize] = useState(1);
+  const [spaceSize, setSpaceSize] = useState(25);
   const [rotate, setRotate] = useState(character.defaultText.r);
   const [curve, setCurve] = useState(false);
   const [vertical, setVertical] = useState(false);
@@ -38,46 +35,10 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const isDragging = useRef(false);
   const lastPos = useRef({ x: 0, y: 0 });
-  const restoring = useRef(null);
   const img = new Image();
 
-  const handleCharacterSelect = (selectedCharacter, source = "primary") => {
+  const handleCharacterSelect = (selectedCharacter) => {
     setCharacter(selectedCharacter);
-    setCharacterSource(source);
-  };
-
-  const resolveCharacter = (id, source = "primary") => {
-    if (source === "secondary") {
-      const secondary = charactersSC.find((c) => c.id === id);
-      if (secondary) return { character: secondary, source: "secondary" };
-    }
-    const primary = characters.find((c) => c.id === id);
-    if (primary) return { character: primary, source: "primary" };
-    const fallbackSecondary = charactersSC.find((c) => c.id === id);
-    if (fallbackSecondary)
-      return { character: fallbackSecondary, source: "secondary" };
-    return null;
-  };
-
-  const loadSettings = () => {
-    if (typeof localStorage === "undefined") return null;
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return null;
-      return JSON.parse(raw);
-    } catch (err) {
-      console.error("Failed to load settings", err);
-      return null;
-    }
-  };
-
-  const saveSettings = (payload) => {
-    if (typeof localStorage === "undefined") return;
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
-    } catch (err) {
-      console.error("Failed to save settings", err);
-    }
   };
 
   const getPoint = (e) => {
@@ -117,29 +78,6 @@ function App() {
     }
   };
 
-  const applySavedSettings = useCallback(
-    (saved, baseChar) => {
-      const fallbackChar = baseChar ?? character;
-      setText(saved.text ?? fallbackChar.defaultText.text);
-      setPosition(
-        saved.position ?? {
-          x: fallbackChar.defaultText.x,
-          y: fallbackChar.defaultText.y,
-        }
-      );
-      setRotate(saved.rotate ?? fallbackChar.defaultText.r);
-      setFontSize(saved.fontSize ?? fallbackChar.defaultText.s);
-      setSpaceSize(saved.spaceSize ?? 1);
-      setCurve(Boolean(saved.curve));
-      setVertical(Boolean(saved.vertical));
-      setTextColor(saved.textColor ?? fallbackChar.color);
-      setStrokeColor(saved.strokeColor ?? "#ffffff");
-      setStrokeWidth(saved.strokeWidth ?? DEFAULT_STROKE_WIDTH);
-      setLoaded(false);
-    },
-    [character]
-  );
-
   const resetSettings = () => {
     setText(character.defaultText.text);
     setPosition({
@@ -148,7 +86,7 @@ function App() {
     });
     setRotate(character.defaultText.r);
     setFontSize(character.defaultText.s);
-    setSpaceSize(1);
+    setSpaceSize(25);
     setCurve(false);
     setVertical(false);
     setTextColor(character.color);
@@ -157,43 +95,6 @@ function App() {
   };
 
   useEffect(() => {
-    const saved = loadSettings();
-    if (saved) {
-      const resolved = resolveCharacter(
-        saved.characterId,
-        saved.characterSource
-      );
-      if (resolved) {
-        if (
-          resolved.character.id === character.id &&
-          characterSource === resolved.source
-        ) {
-          applySavedSettings(saved, resolved.character);
-          setCharacterSource(resolved.source);
-          restoring.current = null;
-        } else {
-          restoring.current = { ...saved, characterSource: resolved.source };
-          setCharacterSource(resolved.source);
-          setCharacter({ ...resolved.character });
-        }
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    const saved = restoring.current;
-    if (
-      saved &&
-      saved.characterId === character.id &&
-      (saved.characterSource ?? "primary") === characterSource
-    ) {
-      applySavedSettings(saved, character);
-      setCharacterSource(saved.characterSource ?? "primary");
-      restoring.current = null;
-      return;
-    }
-
     setText(character.defaultText.text);
     setPosition({
       x: character.defaultText.x,
@@ -201,56 +102,20 @@ function App() {
     });
     setRotate(character.defaultText.r);
     setFontSize(character.defaultText.s);
-    setSpaceSize(1);
+    setSpaceSize(25);
     setCurve(false);
     setVertical(false);
-    setCharacterSource(
-      charactersSC.some((c) => c.id === character.id && c.img === character.img)
-        ? "secondary"
-        : "primary"
-    );
     setTextColor(character.color);
     setStrokeColor("#ffffff");
     setStrokeWidth(DEFAULT_STROKE_WIDTH);
     setLoaded(false);
-  }, [character, characterSource, applySavedSettings]);
+  }, [character]);
 
   img.src = "/img/" + character.img;
 
   img.onload = () => {
     setLoaded(true);
   };
-
-  useEffect(() => {
-    const payload = {
-      characterId: character.id,
-      characterSource,
-      text,
-      position,
-      fontSize,
-      spaceSize,
-      rotate,
-      curve,
-      vertical,
-      textColor,
-      strokeColor,
-      strokeWidth,
-    };
-    saveSettings(payload);
-  }, [
-    character.id,
-    characterSource,
-    text,
-    position,
-    fontSize,
-    spaceSize,
-    rotate,
-    curve,
-    vertical,
-    textColor,
-    strokeColor,
-    strokeWidth,
-  ]);
 
   let angle = (Math.PI * text.length) / 7;
 
@@ -298,8 +163,8 @@ function App() {
           }
         }
       } else if (vertical) {
-        const letterStep = fontSize + spaceSize; // character step along Y
-        const lineStep = fontSize + spaceSize; // next column offset along X
+        const letterStep = fontSize; // character step along Y
+        const lineStep = fontSize + spaceSize - 40; // next column offset along X
         let xOffset = 0;
         for (const line of lines) {
           let yOffset = 0;

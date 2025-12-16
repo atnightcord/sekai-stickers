@@ -251,7 +251,7 @@ function App() {
 
   return (
     <div className="App font-sans">
-      <div className="container">
+      <div className="container-main">
         <div className="vertical">
           <div className="canvas">
             <Canvas

@@ -3,7 +3,7 @@ import "../index.css"
 
 const Canvas = props => {
 
-  // eslint-disable-next-line react/prop-types
+   
   const { draw, ...rest } = props
   const canvasRef = useRef(null)
 

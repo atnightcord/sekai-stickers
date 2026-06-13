@@ -2,21 +2,18 @@ import "../assets/main.css";
 import Canvas from "../components/Canvas";
 import { useState, useEffect, useRef } from "react";
 import characters from "../characters.json";
-import Slider from "@mui/material/Slider";
-import TextField from "@mui/material/TextField";
-//import Button from "@mui/material/Button";
-//import Switch from "@mui/material/Switch";
 import Picker from "../components/Picker";
 import Info from "../components/Info";
 import log from "../utils/log";
-import { Button, Switch, Select } from "@radix-ui/themes";
+import { Button, Switch, Select, Slider, TextArea } from "@radix-ui/themes";
 
 const { ClipboardItem } = window;
 const DEFAULT_STROKE_WIDTH = 9;
 const FONT_STACKS = {
   yuruka: "YurukaStd, SSFangTangTi, sans-serif",
   fangtang: "SSFangTangTi, sans-serif",
-  system: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+  system:
+    "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
 };
 const DEFAULT_FONT_KEY = "yuruka";
 
@@ -46,10 +43,28 @@ function App() {
   const isDragging = useRef(false);
   const lastPos = useRef({ x: 0, y: 0 });
   const fileInputRef = useRef(null);
-  const img = new Image();
+  const imgRef = useRef(null);
+
+  const applyCharacterDefaults = (selectedCharacter) => {
+    setText(selectedCharacter.defaultText.text);
+    setPosition({
+      x: selectedCharacter.defaultText.x,
+      y: selectedCharacter.defaultText.y,
+    });
+    setRotate(selectedCharacter.defaultText.r);
+    setFontSize(selectedCharacter.defaultText.s);
+    setSpaceSize(25);
+    setCurve(false);
+    setVertical(false);
+    setTextColor(selectedCharacter.color);
+    setStrokeColor("#ffffff");
+    setStrokeWidth(DEFAULT_STROKE_WIDTH);
+    setLoaded(false);
+  };
 
   const handleCharacterSelect = (selectedCharacter) => {
     setCharacter(selectedCharacter);
+    applyCharacterDefaults(selectedCharacter);
   };
 
   const handleUpload = (e) => {
@@ -134,27 +149,23 @@ function App() {
   };
 
   useEffect(() => {
-    setText(character.defaultText.text);
-    setPosition({
-      x: character.defaultText.x,
-      y: character.defaultText.y,
-    });
-    setRotate(character.defaultText.r);
-    setFontSize(character.defaultText.s);
-    setSpaceSize(25);
-    setCurve(false);
-    setVertical(false);
-    setTextColor(character.color);
-    setStrokeColor("#ffffff");
-    setStrokeWidth(DEFAULT_STROKE_WIDTH);
-    setLoaded(false);
-  }, [character]);
-
-  img.src = customImage ?? "/img/" + character.img;
-
-  img.onload = () => {
-    setLoaded(true);
-  };
+    let cancelled = false;
+    const src = customImage ?? "/img/" + character.img;
+    const image = new Image();
+    image.onload = () => {
+      if (!cancelled) {
+        imgRef.current = image;
+        setLoaded(true);
+      }
+    };
+    image.onerror = () => {
+      if (!cancelled) setLoaded(false);
+    };
+    image.src = src;
+    return () => {
+      cancelled = true;
+    };
+  }, [character, customImage]);
 
   let angle = (Math.PI * text.length) / 7;
 
@@ -226,7 +237,8 @@ function App() {
   const draw = (ctx) => {
     ctx.canvas.width = 296;
     ctx.canvas.height = 256;
-    if (!loaded) return;
+    const img = imgRef.current;
+    if (!loaded || !img) return;
 
     var hRatio = ctx.canvas.width / img.width;
     var vRatio = ctx.canvas.height / img.height;
@@ -359,8 +371,11 @@ function App() {
             />
           </div>
           <Slider
-            value={curve ? 256 - position.y + fontSize * 3 : 256 - position.y}
-            onChange={(e, v) =>
+            className="slider-vertical"
+            value={[
+              curve ? 256 - position.y + fontSize * 3 : 256 - position.y,
+            ]}
+            onValueChange={([v]) =>
               setPosition({
                 ...position,
                 y: curve ? 256 + fontSize * 3 - v : 256 - v,
@@ -370,34 +385,30 @@ function App() {
             max={256}
             step={1}
             orientation="vertical"
-            track={false}
-            color="secondary"
+            color="gray"
           />
         </div>
         <div className="horizontal">
           <Slider
             className="slider-horizontal"
-            value={position.x}
-            onChange={(e, v) => setPosition({ ...position, x: v })}
+            value={[position.x]}
+            onValueChange={([v]) => setPosition({ ...position, x: v })}
             min={0}
             max={296}
             step={1}
-            track={false}
-            color="secondary"
+            color="gray"
           />
           <div className="settings settingsitems">
             <div className="picker">
               <Picker setCharacter={handleCharacterSelect} />
             </div>
-            <div className="text">
-              <TextField
-                label="Text"
-                size="small"
-                color="secondary"
+            <div className="text w-full">
+              <TextArea
+                size="2"
+                placeholder="Text"
                 value={text}
-                multiline={true}
-                fullWidth
                 onChange={(e) => setText(e.target.value)}
+                className="w-full"
               />
             </div>
             <div>
@@ -416,13 +427,12 @@ function App() {
             <div>
               <label>Rotate: </label>
               <Slider
-                value={rotate}
-                onChange={(e, v) => setRotate(v)}
+                value={[rotate]}
+                onValueChange={([v]) => setRotate(v)}
                 min={-10}
                 max={10}
                 step={0.2}
-                track={false}
-                color="secondary"
+                color="gray"
               />
             </div>
             <div>
@@ -430,13 +440,12 @@ function App() {
                 <nobr>Font size: </nobr>
               </label>
               <Slider
-                value={fontSize}
-                onChange={(e, v) => setFontSize(v)}
+                value={[fontSize]}
+                onValueChange={([v]) => setFontSize(v)}
                 min={10}
                 max={100}
                 step={1}
-                track={false}
-                color="secondary"
+                color="gray"
               />
             </div>
             <div>
@@ -444,13 +453,12 @@ function App() {
                 <nobr>Spacing: </nobr>
               </label>
               <Slider
-                value={spaceSize}
-                onChange={(e, v) => setSpaceSize(v)}
+                value={[spaceSize]}
+                onValueChange={([v]) => setSpaceSize(v)}
                 min={18}
                 max={100}
                 step={1}
-                track={false}
-                color="secondary"
+                color="gray"
               />
             </div>
             <div>
@@ -458,13 +466,12 @@ function App() {
                 <nobr>Letter spacing: </nobr>
               </label>
               <Slider
-                value={letterSpacing}
-                onChange={(e, v) => setLetterSpacing(v)}
+                value={[letterSpacing]}
+                onValueChange={([v]) => setLetterSpacing(v)}
                 min={-10}
                 max={30}
                 step={1}
-                track={false}
-                color="secondary"
+                color="gray"
               />
             </div>
             <div>
@@ -472,31 +479,36 @@ function App() {
                 <nobr>Stroke width: </nobr>
               </label>
               <Slider
-                value={strokeWidth}
-                onChange={(e, v) => setStrokeWidth(v)}
+                value={[strokeWidth]}
+                onValueChange={([v]) => setStrokeWidth(v)}
                 min={0}
                 max={30}
                 step={0.5}
-                track={false}
-                color="secondary"
+                color="gray"
               />
             </div>
             <div>
               <label>Curve (Beta): </label>
-              <Switch onClick={() => setCurve(!curve)} color="secondary" />
+              <Switch
+                checked={curve}
+                onCheckedChange={setCurve}
+                color="gray"
+              />
             </div>
             <div>
               <label>Vertical text: </label>
               <Switch
-                onClick={() => setVertical(!vertical)}
-                color="secondary"
+                checked={vertical}
+                onCheckedChange={setVertical}
+                color="gray"
               />
             </div>
             <div>
               <label>Text behind image: </label>
               <Switch
-                onClick={() => setTextBehind(!textBehind)}
-                color="secondary"
+                checked={textBehind}
+                onCheckedChange={setTextBehind}
+                color="gray"
               />
             </div>
             <div className="flex items-center gap-2">
@@ -510,7 +522,7 @@ function App() {
               <Button
                 size="2"
                 variant="soft"
-                color="secondary"
+                color="gray"
                 onClick={() => setTextColor(character.color)}
               >
                 Reset
@@ -527,7 +539,7 @@ function App() {
               <Button
                 size="2"
                 variant="soft"
-                color="secondary"
+                color="gray"
                 onClick={() => setStrokeColor("#ffffff")}
               >
                 Reset
@@ -546,7 +558,7 @@ function App() {
               <Button
                 size="2"
                 variant="soft"
-                color="secondary"
+                color="gray"
                 onClick={triggerUpload}
               >
                 Upload
@@ -555,7 +567,7 @@ function App() {
                 <Button
                   size="2"
                   variant="soft"
-                  color="secondary"
+                  color="gray"
                   onClick={clearUpload}
                 >
                   Clear
@@ -566,7 +578,7 @@ function App() {
               <Button
                 size="2"
                 variant="solid"
-                color="secondary"
+                color="gray"
                 onClick={resetSettings}
               >
                 Reset All
@@ -586,7 +598,7 @@ function App() {
             <Button size="3" variant="soft" onClick={downloadJpg}>
               Save JPG
             </Button>
-            <Button size="3" variant="soft" onClick={downloadWebp}>
+            <Button className={"col-span-2"} size="3" variant="soft" onClick={downloadWebp}>
               Save WEBP
             </Button>
           </div>

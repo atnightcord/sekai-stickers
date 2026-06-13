@@ -1,4 +1,4 @@
-/* eslint-env node */
+/* global process, __dirname */
 import fs from "fs";
 import path from "path";
 import readline from "readline";

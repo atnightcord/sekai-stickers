@@ -9,13 +9,13 @@ import {
   Link,
 } from "@radix-ui/themes";
 
-// eslint-disable-next-line react/prop-types
+ 
 export default function Info() {
   return (
     <div className="font-sans">
       <Popover.Root>
         <Popover.Trigger>
-          <Button size="3" color="secondary">
+          <Button size="3" color="gray">
             INFO
           </Button>
         </Popover.Trigger>

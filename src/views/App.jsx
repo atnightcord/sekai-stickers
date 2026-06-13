@@ -359,37 +359,12 @@ function App() {
             </p>
           </div>
           <div className="app-header-actions">
-            <div
-              className="character-chip"
-              aria-label={`Current character ${character.name}`}
-            >
-              <img
-                src={customImage ?? `/img/${character.img}`}
-                alt={character.name}
-                width="48"
-                height="48"
-              />
-              <div>
-                <span className="character-chip-label">Current</span>
-                <strong>{character.name}</strong>
-              </div>
-            </div>
             <Info />
           </div>
         </header>
 
         <div className="workspace-grid">
           <section className="preview-panel" aria-labelledby="preview-title">
-            <div className="preview-panel-head">
-              <div>
-                <p className="section-kicker">Preview</p>
-                <h2 id="preview-title">Sticker canvas</h2>
-              </div>
-              <p className="preview-hint">
-                Drag the text directly on the image.
-              </p>
-            </div>
-
             <div className="preview-stage">
               <div className="axis-grid">
                 <div className="axis-grid-canvas">
@@ -443,12 +418,13 @@ function App() {
           </section>
 
           <section className="controls-panel" aria-labelledby="controls-title">
-            <div className="controls-panel-head">
-              <div>
+            <div className="w-full flex flex-row gap-4 justify-between items-center mb-6">
+              <div className="controls-panel-head !mb-0">
                 <p className="section-kicker">Controls</p>
                 <h2 id="controls-title">Tune the sticker</h2>
               </div>
               <Button
+                className="w-full"
                 size="2"
                 variant="soft"
                 color="gray"
@@ -457,7 +433,6 @@ function App() {
                 Reset all
               </Button>
             </div>
-
             <div className="control-sections">
               <section
                 className="control-section"

@@ -35,13 +35,7 @@
 
 .app-shell {
   min-height: 100vh;
-  background:
-    radial-gradient(
-      circle at top left,
-      rgba(197, 86, 147, 0.12),
-      transparent 30%
-    ),
-    linear-gradient(180deg, #fffaff 0%, var(--bg) 100%);
+  background: #ffffff;
   color: var(--ink);
   font-family:
     "SF Pro",
@@ -101,31 +95,6 @@
   flex-wrap: wrap;
 }
 
-.character-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: var(--shadow-sm);
-}
-
-.character-chip img {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 999px;
-  object-fit: cover;
-  background: var(--surface-soft);
-}
-
-.character-chip-label {
-  display: block;
-  font-size: 0.75rem;
-  color: var(--ink-soft);
-}
-
 .workspace-grid {
   display: grid;
   gap: 1rem;
@@ -136,10 +105,12 @@
   border: 1px solid rgba(220, 181, 217, 0.75);
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.94);
-  box-shadow: var(--shadow-md);
 }
 
 .preview-panel {
+  position: sticky;
+  top: 10px;
+  z-index: 10;
   padding: 1.1rem;
 }
 
@@ -151,9 +122,8 @@
 .controls-panel-head,
 .control-section-head {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: flex-start;
-  gap: 0.75rem;
 }
 
 .preview-panel-head h2,
@@ -462,7 +432,6 @@
 .picker-char-btn:focus-visible {
   transform: translateY(-1px);
   border-color: var(--brand);
-  box-shadow: var(--shadow-sm);
 }
 
 .picker-char-btn:active {

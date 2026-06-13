@@ -254,7 +254,7 @@ function App() {
       centerShift_x,
       centerShift_y,
       img.width * ratio,
-      img.height * ratio
+      img.height * ratio,
     );
 
     if (!textBehind) {
@@ -359,7 +359,10 @@ function App() {
             </p>
           </div>
           <div className="app-header-actions">
-            <div className="character-chip" aria-label={`Current character ${character.name}`}>
+            <div
+              className="character-chip"
+              aria-label={`Current character ${character.name}`}
+            >
               <img
                 src={customImage ?? `/img/${character.img}`}
                 alt={character.name}
@@ -382,13 +385,19 @@ function App() {
                 <p className="section-kicker">Preview</p>
                 <h2 id="preview-title">Sticker canvas</h2>
               </div>
-              <p className="preview-hint">Drag the text directly on the image.</p>
+              <p className="preview-hint">
+                Drag the text directly on the image.
+              </p>
             </div>
 
             <div className="preview-stage">
               <div className="axis-grid">
                 <div className="axis-grid-canvas">
-                  <div className="canvas" role="img" aria-label="Sticker preview canvas">
+                  <div
+                    className="canvas"
+                    role="img"
+                    aria-label="Sticker preview canvas"
+                  >
                     <Canvas
                       draw={draw}
                       onPointerDown={handlePointerDown}
@@ -396,7 +405,9 @@ function App() {
                       onPointerUp={handlePointerUp}
                       onPointerLeave={handlePointerUp}
                     />
-                    {!loaded && <div className="canvas-loading">Loading sticker…</div>}
+                    {!loaded && (
+                      <div className="canvas-loading">Loading sticker…</div>
+                    )}
                   </div>
                 </div>
 
@@ -437,13 +448,21 @@ function App() {
                 <p className="section-kicker">Controls</p>
                 <h2 id="controls-title">Tune the sticker</h2>
               </div>
-              <Button size="2" variant="soft" color="gray" onClick={resetSettings}>
+              <Button
+                size="2"
+                variant="soft"
+                color="gray"
+                onClick={resetSettings}
+              >
                 Reset all
               </Button>
             </div>
 
             <div className="control-sections">
-              <section className="control-section" aria-labelledby="content-title">
+              <section
+                className="control-section"
+                aria-labelledby="content-title"
+              >
                 <div className="control-section-head">
                   <h3 id="content-title">Content</h3>
                   <p>Choose a character and write the line.</p>
@@ -472,7 +491,10 @@ function App() {
                   </div>
 
                   <div className="control-row">
-                    <label className="field-label field-label--inline" htmlFor="font-select">
+                    <label
+                      className="field-label field-label--inline"
+                      htmlFor="font-select"
+                    >
                       Font
                     </label>
                     <Select.Root value={fontKey} onValueChange={setFontKey}>
@@ -487,7 +509,10 @@ function App() {
                 </div>
               </section>
 
-              <section className="control-section" aria-labelledby="layout-title">
+              <section
+                className="control-section"
+                aria-labelledby="layout-title"
+              >
                 <div className="control-section-head">
                   <h3 id="layout-title">Layout</h3>
                   <p>Shape the position, angle, and spacing.</p>
@@ -496,7 +521,9 @@ function App() {
                 <div className="control-stack">
                   <div className="slider-field">
                     <div className="slider-field-head">
-                      <label className="field-label" htmlFor="rotate-slider">Rotate</label>
+                      <label className="field-label" htmlFor="rotate-slider">
+                        Rotate
+                      </label>
                       <span>{rotate.toFixed(1)}°</span>
                     </div>
                     <Slider
@@ -511,7 +538,9 @@ function App() {
 
                   <div className="slider-field">
                     <div className="slider-field-head">
-                      <label className="field-label" htmlFor="font-size-slider">Font size</label>
+                      <label className="field-label" htmlFor="font-size-slider">
+                        Font size
+                      </label>
                       <span>{fontSize}px</span>
                     </div>
                     <Slider
@@ -526,7 +555,9 @@ function App() {
 
                   <div className="slider-field">
                     <div className="slider-field-head">
-                      <label className="field-label" htmlFor="spacing-slider">Line spacing</label>
+                      <label className="field-label" htmlFor="spacing-slider">
+                        Line spacing
+                      </label>
                       <span>{spaceSize}px</span>
                     </div>
                     <Slider
@@ -541,7 +572,10 @@ function App() {
 
                   <div className="slider-field">
                     <div className="slider-field-head">
-                      <label className="field-label" htmlFor="letter-spacing-slider">
+                      <label
+                        className="field-label"
+                        htmlFor="letter-spacing-slider"
+                      >
                         Letter spacing
                       </label>
                       <span>{letterSpacing}px</span>
@@ -559,16 +593,29 @@ function App() {
                   <div className="toggle-grid">
                     <div className="toggle-row">
                       <div>
-                        <label className="field-label" htmlFor="curve-toggle">Curve text</label>
+                        <label className="field-label" htmlFor="curve-toggle">
+                          Curve text
+                        </label>
                         <p className="toggle-help">Wrap text around an arc.</p>
                       </div>
-                      <Switch id="curve-toggle" checked={curve} onCheckedChange={setCurve} />
+                      <Switch
+                        id="curve-toggle"
+                        checked={curve}
+                        onCheckedChange={setCurve}
+                      />
                     </div>
 
                     <div className="toggle-row">
                       <div>
-                        <label className="field-label" htmlFor="vertical-toggle">Vertical text</label>
-                        <p className="toggle-help">Stack characters top to bottom.</p>
+                        <label
+                          className="field-label"
+                          htmlFor="vertical-toggle"
+                        >
+                          Vertical text
+                        </label>
+                        <p className="toggle-help">
+                          Stack characters top to bottom.
+                        </p>
                       </div>
                       <Switch
                         id="vertical-toggle"
@@ -579,8 +626,12 @@ function App() {
 
                     <div className="toggle-row">
                       <div>
-                        <label className="field-label" htmlFor="behind-toggle">Text behind image</label>
-                        <p className="toggle-help">Place the sticker in front of the text.</p>
+                        <label className="field-label" htmlFor="behind-toggle">
+                          Text behind image
+                        </label>
+                        <p className="toggle-help">
+                          Place the sticker in front of the text.
+                        </p>
                       </div>
                       <Switch
                         id="behind-toggle"
@@ -592,7 +643,10 @@ function App() {
                 </div>
               </section>
 
-              <section className="control-section" aria-labelledby="style-title">
+              <section
+                className="control-section"
+                aria-labelledby="style-title"
+              >
                 <div className="control-section-head">
                   <h3 id="style-title">Style</h3>
                   <p>Control color, outline, and custom artwork.</p>
@@ -601,7 +655,12 @@ function App() {
                 <div className="control-stack">
                   <div className="slider-field">
                     <div className="slider-field-head">
-                      <label className="field-label" htmlFor="stroke-width-slider">Stroke width</label>
+                      <label
+                        className="field-label"
+                        htmlFor="stroke-width-slider"
+                      >
+                        Stroke width
+                      </label>
                       <span>{strokeWidth}px</span>
                     </div>
                     <Slider
@@ -616,8 +675,12 @@ function App() {
 
                   <div className="control-row control-row--color">
                     <div>
-                      <label className="field-label" htmlFor="text-color">Text color</label>
-                      <p className="toggle-help">Use the character accent or pick your own.</p>
+                      <label className="field-label" htmlFor="text-color">
+                        Text color
+                      </label>
+                      <p className="toggle-help">
+                        Use the character accent or pick your own.
+                      </p>
                     </div>
                     <div className="color-control-group">
                       <input
@@ -641,8 +704,12 @@ function App() {
 
                   <div className="control-row control-row--color">
                     <div>
-                      <label className="field-label" htmlFor="stroke-color">Stroke color</label>
-                      <p className="toggle-help">Outline color for better contrast.</p>
+                      <label className="field-label" htmlFor="stroke-color">
+                        Stroke color
+                      </label>
+                      <p className="toggle-help">
+                        Outline color for better contrast.
+                      </p>
                     </div>
                     <div className="color-control-group">
                       <input
@@ -666,8 +733,12 @@ function App() {
 
                   <div className="control-row control-row--upload">
                     <div>
-                      <label className="field-label" htmlFor="custom-image">Custom image</label>
-                      <p className="toggle-help">Replace the character art with your own image.</p>
+                      <label className="field-label" htmlFor="custom-image">
+                        Custom image
+                      </label>
+                      <p className="toggle-help">
+                        Replace the character art with your own image.
+                      </p>
                     </div>
                     <div className="upload-control-group">
                       <input
@@ -679,11 +750,21 @@ function App() {
                         aria-label="Custom image upload"
                         style={{ display: "none" }}
                       />
-                      <Button size="2" variant="soft" color="gray" onClick={triggerUpload}>
+                      <Button
+                        size="2"
+                        variant="soft"
+                        color="gray"
+                        onClick={triggerUpload}
+                      >
                         Upload
                       </Button>
                       {customImage && (
-                        <Button size="2" variant="soft" color="gray" onClick={clearUpload}>
+                        <Button
+                          size="2"
+                          variant="soft"
+                          color="gray"
+                          onClick={clearUpload}
+                        >
                           Clear
                         </Button>
                       )}
@@ -692,14 +773,19 @@ function App() {
                 </div>
               </section>
 
-              <section className="control-section export-section" aria-labelledby="export-title">
+              <section
+                className="control-section export-section"
+                aria-labelledby="export-title"
+              >
                 <div className="control-section-head">
                   <h3 id="export-title">Export</h3>
                   <p>Copy fast on mobile, or save a file locally.</p>
                 </div>
 
                 <div className="export-grid">
-                  <Button size="3" onClick={copy}>Copy PNG</Button>
+                  <Button size="3" onClick={copy}>
+                    Copy PNG
+                  </Button>
                   <Button size="3" variant="soft" onClick={copyWithBg}>
                     Copy JPG
                   </Button>
@@ -709,7 +795,12 @@ function App() {
                   <Button size="3" variant="soft" onClick={downloadJpg}>
                     Save JPG
                   </Button>
-                  <Button className="export-wide" size="3" variant="soft" onClick={downloadWebp}>
+                  <Button
+                    className="export-wide"
+                    size="3"
+                    variant="soft"
+                    onClick={downloadWebp}
+                  >
                     Save WEBP
                   </Button>
                 </div>
@@ -720,7 +811,9 @@ function App() {
       </div>
 
       <div className="mobile-action-bar">
-        <Button size="3" onClick={copy}>Copy PNG</Button>
+        <Button size="3" onClick={copy}>
+          Copy PNG
+        </Button>
         <Button size="3" variant="soft" onClick={download}>
           Save PNG
         </Button>

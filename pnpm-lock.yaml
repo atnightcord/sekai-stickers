@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@dayflow/blossom-color-picker':
+        specifier: ^2.2.1
+        version: 2.2.1
+      '@dayflow/blossom-color-picker-react':
+        specifier: ^1.2.1
+        version: 1.2.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@radix-ui/themes':
         specifier: ^3.3.0
         version: 3.3.0(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -139,6 +145,15 @@ packages:
   '@babel/types@7.29.7':
     resolution: {integrity: sha512-4zBIxpPzowiZpusoFkyGVwakdRJUyuH5PxQ/PrqghfdFWWasvnCdPfQXHrenDai+gyLARulZjZowCOj6fjT4pA==}
     engines: {node: '>=6.9.0'}
+
+  '@dayflow/blossom-color-picker-react@1.2.1':
+    resolution: {integrity: sha512-Bf+LH7FV3dF5FSZbST5WBAs54c3ZeIlzC5qaj5YpEXiqGFZwiPqgXJ8BQ0nJ63WBtIHVAzTLMY+ONkkUYXAknw==}
+    peerDependencies:
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
+
+  '@dayflow/blossom-color-picker@2.2.1':
+    resolution: {integrity: sha512-V3CdtY3qLMVDxhtbtAEIyN4wWQEN+vIj6gVkBZY1O2HX4hq+6mwLRZ/A13jEG2PN8WBQmfRw1cgzGx+Pjvd/PQ==}
 
   '@emnapi/core@1.10.0':
     resolution: {integrity: sha512-yq6OkJ4p82CAfPl0u9mQebQHKPJkY7WrIuk205cTYnYe+k2Z8YBh11FrbRG/H6ihirqcacOgl2BIO8oyMQLeXw==}
@@ -2811,6 +2826,14 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 7.29.7
       '@babel/helper-validator-identifier': 7.29.7
+
+  '@dayflow/blossom-color-picker-react@1.2.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+    dependencies:
+      '@dayflow/blossom-color-picker': 2.2.1
+      react: 19.2.7
+      react-dom: 19.2.7(react@19.2.7)
+
+  '@dayflow/blossom-color-picker@2.2.1': {}
 
   '@emnapi/core@1.10.0':
     dependencies:

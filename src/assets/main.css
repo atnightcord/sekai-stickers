@@ -351,23 +351,11 @@
   object-fit: cover;
 }
 
-.color-swatch {
-  width: 2.75rem;
-  height: 2.75rem;
-  padding: 0;
-  border: 1px solid var(--border-strong);
-  border-radius: 999px;
-  background: white;
-  cursor: pointer;
-}
-
-.color-swatch::-webkit-color-swatch-wrapper {
-  padding: 0.18rem;
-}
-
-.color-swatch::-webkit-color-swatch {
-  border: none;
-  border-radius: 999px;
+.blossom-color-field {
+  flex: none;
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
 }
 
 .picker {

@@ -12,6 +12,8 @@
     "batch-add": "node ./scripts/batchAddCharacter.mjs"
   },
   "dependencies": {
+    "@dayflow/blossom-color-picker": "^2.2.1",
+    "@dayflow/blossom-color-picker-react": "^1.2.1",
     "@radix-ui/themes": "^3.3.0",
     "axios": "^1.17.0",
     "react": "^19.2.7",

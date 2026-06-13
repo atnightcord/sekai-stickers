@@ -1,6 +1,9 @@
 import "../assets/main.css";
 import Canvas from "../components/Canvas";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
+import { BlossomColorPicker } from "@dayflow/blossom-color-picker-react";
+import "@dayflow/blossom-color-picker/styles.css";
+import { hexToBlossomValue } from "../utils/blossomColor";
 import defaultCharacter from "../defaultCharacter";
 import Picker from "../components/Picker";
 import Info from "../components/Info";
@@ -41,6 +44,15 @@ function App() {
   const lastPos = useRef({ x: 0, y: 0 });
   const fileInputRef = useRef(null);
   const imgRef = useRef(null);
+
+  const textBlossomValue = useMemo(
+    () => hexToBlossomValue(textColor),
+    [textColor]
+  );
+  const strokeBlossomValue = useMemo(
+    () => hexToBlossomValue(strokeColor),
+    [strokeColor]
+  );
 
   const applyCharacterDefaults = (selectedCharacter) => {
     setText(selectedCharacter.defaultText.text);
@@ -658,12 +670,14 @@ function App() {
                       </p>
                     </div>
                     <div className="color-control-group">
-                      <input
-                        id="text-color"
-                        className="color-swatch"
-                        type="color"
-                        value={textColor}
-                        onChange={(e) => setTextColor(e.target.value)}
+                      <BlossomColorPicker
+                        className="blossom-color-field"
+                        value={textBlossomValue}
+                        onChange={(c) => setTextColor(c.hex)}
+                        showAlphaSlider={false}
+                        coreSize={30}
+                        petalSize={28}
+                        adaptivePositioning
                         aria-label="Text color"
                       />
                       <Button
@@ -687,12 +701,14 @@ function App() {
                       </p>
                     </div>
                     <div className="color-control-group">
-                      <input
-                        id="stroke-color"
-                        className="color-swatch"
-                        type="color"
-                        value={strokeColor}
-                        onChange={(e) => setStrokeColor(e.target.value)}
+                      <BlossomColorPicker
+                        className="blossom-color-field"
+                        value={strokeBlossomValue}
+                        onChange={(c) => setStrokeColor(c.hex)}
+                        showAlphaSlider={false}
+                        coreSize={30}
+                        petalSize={28}
+                        adaptivePositioning
                         aria-label="Stroke color"
                       />
                       <Button

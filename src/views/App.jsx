@@ -18,8 +18,6 @@ const FONT_STACKS = {
 const DEFAULT_FONT_KEY = "yuruka";
 
 function App() {
-  const [feedback, setFeedback] = useState("");
-
   const [character, setCharacter] = useState(defaultCharacter);
   const [text, setText] = useState(character.defaultText.text);
   const [position, setPosition] = useState({
@@ -44,16 +42,6 @@ function App() {
   const fileInputRef = useRef(null);
   const imgRef = useRef(null);
 
-  const showFeedback = (message) => {
-    setFeedback(message);
-  };
-
-  useEffect(() => {
-    if (!feedback) return undefined;
-    const timer = window.setTimeout(() => setFeedback(""), 1800);
-    return () => window.clearTimeout(timer);
-  }, [feedback]);
-
   const applyCharacterDefaults = (selectedCharacter) => {
     setText(selectedCharacter.defaultText.text);
     setPosition({
@@ -74,7 +62,6 @@ function App() {
   const handleCharacterSelect = (selectedCharacter) => {
     setCharacter(selectedCharacter);
     applyCharacterDefaults(selectedCharacter);
-    showFeedback(`Switched to ${selectedCharacter.name}`);
   };
 
   const handleUpload = (e) => {
@@ -86,7 +73,6 @@ function App() {
       if (typeof result === "string") {
         setLoaded(false);
         setCustomImage(result);
-        showFeedback(`Loaded ${file.name}`);
         if (fileInputRef.current) fileInputRef.current.value = "";
       }
     };
@@ -96,7 +82,6 @@ function App() {
   const clearUpload = () => {
     setLoaded(false);
     setCustomImage(null);
-    showFeedback("Custom image cleared");
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
@@ -158,7 +143,6 @@ function App() {
     setFontKey(DEFAULT_FONT_KEY);
     setTextBehind(false);
     setLetterSpacing(0);
-    showFeedback("Settings reset");
   };
 
   useEffect(() => {
@@ -284,7 +268,6 @@ function App() {
     link.download = `${character.name}_generated.png`;
     link.href = canvas.toDataURL("image/png");
     link.click();
-    showFeedback("PNG saved");
   };
 
   const downloadWebp = async () => {
@@ -296,7 +279,6 @@ function App() {
     link.download = `${character.name}_generated.webp`;
     link.href = canvas.toDataURL("image/webp");
     link.click();
-    showFeedback("WEBP saved");
   };
 
   const downloadJpg = async () => {
@@ -315,7 +297,6 @@ function App() {
     link.download = `${character.name}_generated.jpg`;
     link.href = imageData;
     link.click();
-    showFeedback("JPG saved");
   };
 
   function b64toBlob(b64Data, contentType = null, sliceSize = null) {
@@ -343,7 +324,6 @@ function App() {
       }),
     ]);
     await log(character.id, character.name, "copy");
-    showFeedback("PNG copied");
   };
 
   const copyWithBg = async () => {
@@ -364,7 +344,6 @@ function App() {
       }),
     ]);
     await log(character.id, character.name, "copy");
-    showFeedback("JPG copied");
   };
 
   return (
@@ -449,18 +428,6 @@ function App() {
 
                 <div className="axis-grid-empty" />
               </div>
-            </div>
-
-            <div className="preview-meta">
-              <span>{customImage ? "Custom image active" : character.character}</span>
-              <span>{loaded ? "Ready" : "Loading"}</span>
-              <span>{curve ? "Curve on" : vertical ? "Vertical text" : "Horizontal text"}</span>
-            </div>
-
-            <div className="feedback-row" aria-live="polite">
-              <span className={`feedback-pill${feedback ? " is-visible" : ""}`}>
-                {feedback || "Ready to export"}
-              </span>
             </div>
           </section>
 

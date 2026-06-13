@@ -12,9 +12,9 @@
   --brand-soft: #ffe4f1;
   --shadow-sm: 0 10px 24px rgba(112, 36, 100, 0.08);
   --shadow-md: 0 20px 50px rgba(112, 36, 100, 0.14);
-  --radius-sm: 12px;
-  --radius-md: 18px;
-  --radius-lg: 24px;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
   --app-max: 1180px;
 }
 

@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://st.ayaka.one/sitemap.xml
+
+# Static HTML pages (not the SPA tool)
+Disallow: /bot-privacy.html
+Disallow: /bot-tos.html
+
+# Old CRA assets
+Disallow: /static/

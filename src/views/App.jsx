@@ -358,7 +358,8 @@ function App() {
   };
 
   return (
-    <div className="App font-sans">
+    <main className="App font-sans">
+      <h1 className="sr-only">Sekai Stickers — Project Sekai Sticker Maker</h1>
       <div className="container-main">
         <div className="vertical">
           <div className="canvas">
@@ -607,7 +608,7 @@ function App() {
           <Info />
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 

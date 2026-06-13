@@ -1,34 +1,50 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @font-face {
-    font-family: 'YurukaStd';
-    src: local('YurukaStd'), url(./fonts/YurukaStd.woff2) format('woff2');
+  font-family: "YurukaStd";
+  src: local("YurukaStd"), url(./fonts/YurukaStd.woff2) format("woff2");
 }
 
 @font-face {
-    font-family: 'SSFangTangTi';
-    src: local('SSFangTangTi'), url(./fonts/ShangShouFangTangTi.woff2) format('woff2');
+  font-family: "SSFangTangTi";
+  src: local("SSFangTangTi"), url(./fonts/ShangShouFangTangTi.woff2) format("woff2");
 }
 
-/** Regular */
 @font-face {
-    font-family: "SF Pro";
-    font-weight: 400;
-    src: url("./assets/webfont/SFPRODISPLAYREGULAR.woff2");
+  font-family: "SF Pro";
+  font-weight: 400;
+  src: url("./assets/webfont/SFPRODISPLAYREGULAR.woff2");
 }
 
-/** Medium */
 @font-face {
-    font-family: "SF Pro";
-    font-weight: 500;
-    src: url("./assets/webfont/SFPRODISPLAYMEDIUM.woff2");
+  font-family: "SF Pro";
+  font-weight: 500;
+  src: url("./assets/webfont/SFPRODISPLAYMEDIUM.woff2");
 }
 
-/** Bold */
 @font-face {
-    font-family: "SF Pro";
-    font-weight: 700;
-    src: url("./assets/webfont/SFPRODISPLAYBOLD.woff2");
+  font-family: "SF Pro";
+  font-weight: 700;
+  src: url("./assets/webfont/SFPRODISPLAYBOLD.woff2");
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color-scheme: light;
+  font-family: "SF Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
 }

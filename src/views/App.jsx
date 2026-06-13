@@ -1,7 +1,7 @@
 import "../assets/main.css";
 import Canvas from "../components/Canvas";
 import { useState, useEffect, useRef } from "react";
-import characters from "../characters.json";
+import defaultCharacter from "../defaultCharacter";
 import Picker from "../components/Picker";
 import Info from "../components/Info";
 import log from "../utils/log";
@@ -18,10 +18,9 @@ const FONT_STACKS = {
 const DEFAULT_FONT_KEY = "yuruka";
 
 function App() {
-  // using this to trigger the useEffect because lazy to think of a better way
-  const [rand, setRand] = useState(0);
+  const [feedback, setFeedback] = useState("");
 
-  const [character, setCharacter] = useState(characters[49]);
+  const [character, setCharacter] = useState(defaultCharacter);
   const [text, setText] = useState(character.defaultText.text);
   const [position, setPosition] = useState({
     x: character.defaultText.x,
@@ -45,6 +44,16 @@ function App() {
   const fileInputRef = useRef(null);
   const imgRef = useRef(null);
 
+  const showFeedback = (message) => {
+    setFeedback(message);
+  };
+
+  useEffect(() => {
+    if (!feedback) return undefined;
+    const timer = window.setTimeout(() => setFeedback(""), 1800);
+    return () => window.clearTimeout(timer);
+  }, [feedback]);
+
   const applyCharacterDefaults = (selectedCharacter) => {
     setText(selectedCharacter.defaultText.text);
     setPosition({
@@ -65,6 +74,7 @@ function App() {
   const handleCharacterSelect = (selectedCharacter) => {
     setCharacter(selectedCharacter);
     applyCharacterDefaults(selectedCharacter);
+    showFeedback(`Switched to ${selectedCharacter.name}`);
   };
 
   const handleUpload = (e) => {
@@ -76,6 +86,7 @@ function App() {
       if (typeof result === "string") {
         setLoaded(false);
         setCustomImage(result);
+        showFeedback(`Loaded ${file.name}`);
         if (fileInputRef.current) fileInputRef.current.value = "";
       }
     };
@@ -85,6 +96,7 @@ function App() {
   const clearUpload = () => {
     setLoaded(false);
     setCustomImage(null);
+    showFeedback("Custom image cleared");
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
@@ -146,6 +158,7 @@ function App() {
     setFontKey(DEFAULT_FONT_KEY);
     setTextBehind(false);
     setLetterSpacing(0);
+    showFeedback("Settings reset");
   };
 
   useEffect(() => {
@@ -192,8 +205,8 @@ function App() {
         }
       }
     } else if (vertical) {
-      const letterStep = fontSize + letterSpacing; // character step along Y with spacing
-      const lineStep = fontSize + spaceSize - 40; // next column offset along X
+      const letterStep = fontSize + letterSpacing;
+      const lineStep = fontSize + spaceSize - 40;
       let xOffset = 0;
       for (const line of lines) {
         let yOffset = 0;
@@ -205,16 +218,13 @@ function App() {
         xOffset += lineStep;
       }
     } else {
-      // Horizontal text with character spacing support
       if (letterSpacing === 0) {
-        // Original logic for no letter spacing
         for (let i = 0, k = 0; i < lines.length; i++) {
           ctx.strokeText(lines[i], 0, k);
           ctx.fillText(lines[i], 0, k);
           k += spaceSize;
         }
       } else {
-        // Character-by-character rendering with letter spacing
         ctx.textAlign = "left";
         for (let i = 0; i < lines.length; i++) {
           const line = lines[i];
@@ -228,7 +238,7 @@ function App() {
             charX += charMetrics.width + letterSpacing;
           }
         }
-        ctx.textAlign = "center"; // Reset alignment
+        ctx.textAlign = "center";
       }
     }
     ctx.restore();
@@ -248,7 +258,6 @@ function App() {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
     if (textBehind) {
-      // Draw text first, then image on top
       drawText(ctx);
     }
 
@@ -265,7 +274,6 @@ function App() {
     );
 
     if (!textBehind) {
-      // Draw text on top of image (default)
       drawText(ctx);
     }
   };
@@ -276,10 +284,10 @@ function App() {
     link.download = `${character.name}_generated.png`;
     link.href = canvas.toDataURL("image/png");
     link.click();
+    showFeedback("PNG saved");
   };
 
   const downloadWebp = async () => {
-    // resize height to 512px
     const canvas = document.getElementsByTagName("canvas")[0];
     const ctx = canvas.getContext("2d");
     const ratio = 512 / canvas.height;
@@ -288,6 +296,7 @@ function App() {
     link.download = `${character.name}_generated.webp`;
     link.href = canvas.toDataURL("image/webp");
     link.click();
+    showFeedback("WEBP saved");
   };
 
   const downloadJpg = async () => {
@@ -306,6 +315,7 @@ function App() {
     link.download = `${character.name}_generated.jpg`;
     link.href = imageData;
     link.click();
+    showFeedback("JPG saved");
   };
 
   function b64toBlob(b64Data, contentType = null, sliceSize = null) {
@@ -333,7 +343,7 @@ function App() {
       }),
     ]);
     await log(character.id, character.name, "copy");
-    setRand(rand + 1);
+    showFeedback("PNG copied");
   };
 
   const copyWithBg = async () => {
@@ -354,259 +364,402 @@ function App() {
       }),
     ]);
     await log(character.id, character.name, "copy");
-    setRand(rand + 1);
+    showFeedback("JPG copied");
   };
 
   return (
-    <main className="App font-sans">
-      <h1 className="sr-only">Sekai Stickers — Project Sekai Sticker Maker</h1>
-      <div className="container-main">
-        <div className="vertical">
-          <div className="canvas">
-            <Canvas
-              draw={draw}
-              onPointerDown={handlePointerDown}
-              onPointerMove={handlePointerMove}
-              onPointerUp={handlePointerUp}
-              onPointerLeave={handlePointerUp}
-            />
+    <main className="app-shell">
+      <div className="app-chrome">
+        <header className="app-header">
+          <div className="app-header-copy">
+            <p className="app-eyebrow">Sekai Stickers</p>
+            <h1 className="app-title">Make a sticker in seconds</h1>
+            <p className="app-subtitle">
+              Pick a character, type your line, drag the text into place, then
+              copy or save the result.
+            </p>
           </div>
-          <Slider
-            className="slider-vertical"
-            value={[
-              curve ? 256 - position.y + fontSize * 3 : 256 - position.y,
-            ]}
-            onValueChange={([v]) =>
-              setPosition({
-                ...position,
-                y: curve ? 256 + fontSize * 3 - v : 256 - v,
-              })
-            }
-            min={0}
-            max={256}
-            step={1}
-            orientation="vertical"
-            color="gray"
-          />
-        </div>
-        <div className="horizontal">
-          <Slider
-            className="slider-horizontal"
-            value={[position.x]}
-            onValueChange={([v]) => setPosition({ ...position, x: v })}
-            min={0}
-            max={296}
-            step={1}
-            color="gray"
-          />
-          <div className="settings settingsitems">
-            <div className="picker">
-              <Picker setCharacter={handleCharacterSelect} />
-            </div>
-            <div className="text w-full">
-              <TextArea
-                size="2"
-                placeholder="Text"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                className="w-full"
+          <div className="app-header-actions">
+            <div className="character-chip" aria-label={`Current character ${character.name}`}>
+              <img
+                src={customImage ?? `/img/${character.img}`}
+                alt={character.name}
+                width="48"
+                height="48"
               />
+              <div>
+                <span className="character-chip-label">Current</span>
+                <strong>{character.name}</strong>
+              </div>
             </div>
-            <div>
-              <label>
-                <nobr>Font: </nobr>
-              </label>
-              <Select.Root value={fontKey} onValueChange={setFontKey}>
-                <Select.Trigger />
-                <Select.Content>
-                  <Select.Item value="yuruka">YurukaStd</Select.Item>
-                  <Select.Item value="fangtang">SSFangTangTi</Select.Item>
-                  <Select.Item value="system">System Sans</Select.Item>
-                </Select.Content>
-              </Select.Root>
-            </div>
-            <div>
-              <label>Rotate: </label>
-              <Slider
-                value={[rotate]}
-                onValueChange={([v]) => setRotate(v)}
-                min={-10}
-                max={10}
-                step={0.2}
-                color="gray"
-              />
-            </div>
-            <div>
-              <label>
-                <nobr>Font size: </nobr>
-              </label>
-              <Slider
-                value={[fontSize]}
-                onValueChange={([v]) => setFontSize(v)}
-                min={10}
-                max={100}
-                step={1}
-                color="gray"
-              />
-            </div>
-            <div>
-              <label>
-                <nobr>Spacing: </nobr>
-              </label>
-              <Slider
-                value={[spaceSize]}
-                onValueChange={([v]) => setSpaceSize(v)}
-                min={18}
-                max={100}
-                step={1}
-                color="gray"
-              />
-            </div>
-            <div>
-              <label>
-                <nobr>Letter spacing: </nobr>
-              </label>
-              <Slider
-                value={[letterSpacing]}
-                onValueChange={([v]) => setLetterSpacing(v)}
-                min={-10}
-                max={30}
-                step={1}
-                color="gray"
-              />
-            </div>
-            <div>
-              <label>
-                <nobr>Stroke width: </nobr>
-              </label>
-              <Slider
-                value={[strokeWidth]}
-                onValueChange={([v]) => setStrokeWidth(v)}
-                min={0}
-                max={30}
-                step={0.5}
-                color="gray"
-              />
-            </div>
-            <div>
-              <label>Curve (Beta): </label>
-              <Switch
-                checked={curve}
-                onCheckedChange={setCurve}
-                color="gray"
-              />
-            </div>
-            <div>
-              <label>Vertical text: </label>
-              <Switch
-                checked={vertical}
-                onCheckedChange={setVertical}
-                color="gray"
-              />
-            </div>
-            <div>
-              <label>Text behind image: </label>
-              <Switch
-                checked={textBehind}
-                onCheckedChange={setTextBehind}
-                color="gray"
-              />
-            </div>
-            <div className="flex items-center gap-2">
-              <label>Text color: </label>
-              <input
-                type="color"
-                value={textColor}
-                onChange={(e) => setTextColor(e.target.value)}
-                aria-label="Text color"
-              />
-              <Button
-                size="2"
-                variant="soft"
-                color="gray"
-                onClick={() => setTextColor(character.color)}
-              >
-                Reset
-              </Button>
-            </div>
-            <div className="flex items-center gap-2">
-              <label>Stroke color: </label>
-              <input
-                type="color"
-                value={strokeColor}
-                onChange={(e) => setStrokeColor(e.target.value)}
-                aria-label="Stroke color"
-              />
-              <Button
-                size="2"
-                variant="soft"
-                color="gray"
-                onClick={() => setStrokeColor("#ffffff")}
-              >
-                Reset
-              </Button>
-            </div>
-            <div className="flex items-center gap-2">
-              <label>Custom image: </label>
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                onChange={handleUpload}
-                aria-label="Custom image upload"
-                style={{ display: "none" }}
-              />
-              <Button
-                size="2"
-                variant="soft"
-                color="gray"
-                onClick={triggerUpload}
-              >
-                Upload
-              </Button>
-              {customImage && (
-                <Button
-                  size="2"
-                  variant="soft"
-                  color="gray"
-                  onClick={clearUpload}
-                >
-                  Clear
-                </Button>
-              )}
-            </div>
-            <div className="flex items-center gap-2">
-              <Button
-                size="2"
-                variant="solid"
-                color="gray"
-                onClick={resetSettings}
-              >
-                Reset All
-              </Button>
-            </div>
+            <Info />
           </div>
-          <div className="grid grid-cols-2 gap-2 py-2">
-            <Button size="3" variant="soft" onClick={copy}>
-              Copy PNG
-            </Button>
-            <Button size="3" variant="soft" onClick={copyWithBg}>
-              Copy JPG
-            </Button>
-            <Button size="3" variant="soft" onClick={download}>
-              Save PNG
-            </Button>
-            <Button size="3" variant="soft" onClick={downloadJpg}>
-              Save JPG
-            </Button>
-            <Button className={"col-span-2"} size="3" variant="soft" onClick={downloadWebp}>
-              Save WEBP
-            </Button>
-          </div>
+        </header>
+
+        <div className="workspace-grid">
+          <section className="preview-panel" aria-labelledby="preview-title">
+            <div className="preview-panel-head">
+              <div>
+                <p className="section-kicker">Preview</p>
+                <h2 id="preview-title">Sticker canvas</h2>
+              </div>
+              <p className="preview-hint">Drag the text directly on the image.</p>
+            </div>
+
+            <div className="preview-stage">
+              <div className="vertical preview-canvas-stack">
+                <div className="canvas-shell">
+                  <div className="canvas" role="img" aria-label="Sticker preview canvas">
+                    <Canvas
+                      draw={draw}
+                      onPointerDown={handlePointerDown}
+                      onPointerMove={handlePointerMove}
+                      onPointerUp={handlePointerUp}
+                      onPointerLeave={handlePointerUp}
+                    />
+                    {!loaded && <div className="canvas-loading">Loading sticker…</div>}
+                  </div>
+                </div>
+                <Slider
+                  className="slider-vertical"
+                  value={[
+                    curve ? 256 - position.y + fontSize * 3 : 256 - position.y,
+                  ]}
+                  onValueChange={([v]) =>
+                    setPosition({
+                      ...position,
+                      y: curve ? 256 + fontSize * 3 - v : 256 - v,
+                    })
+                  }
+                  min={0}
+                  max={256}
+                  step={1}
+                  orientation="vertical"
+                />
+              </div>
+
+              <div className="horizontal preview-axis-control">
+                <div className="axis-label-row">
+                  <span>Horizontal position</span>
+                  <span>{Math.round(position.x)} px</span>
+                </div>
+                <Slider
+                  className="slider-horizontal"
+                  value={[position.x]}
+                  onValueChange={([v]) => setPosition({ ...position, x: v })}
+                  min={0}
+                  max={296}
+                  step={1}
+                />
+              </div>
+            </div>
+
+            <div className="preview-meta">
+              <span>{customImage ? "Custom image active" : character.character}</span>
+              <span>{loaded ? "Ready" : "Loading"}</span>
+              <span>{curve ? "Curve on" : vertical ? "Vertical text" : "Horizontal text"}</span>
+            </div>
+
+            <div className="feedback-row" aria-live="polite">
+              <span className={`feedback-pill${feedback ? " is-visible" : ""}`}>
+                {feedback || "Ready to export"}
+              </span>
+            </div>
+          </section>
+
+          <section className="controls-panel" aria-labelledby="controls-title">
+            <div className="controls-panel-head">
+              <div>
+                <p className="section-kicker">Controls</p>
+                <h2 id="controls-title">Tune the sticker</h2>
+              </div>
+              <Button size="2" variant="soft" color="gray" onClick={resetSettings}>
+                Reset all
+              </Button>
+            </div>
+
+            <div className="control-sections">
+              <section className="control-section" aria-labelledby="content-title">
+                <div className="control-section-head">
+                  <h3 id="content-title">Content</h3>
+                  <p>Choose a character and write the line.</p>
+                </div>
+
+                <div className="control-stack">
+                  <div className="picker">
+                    <Picker
+                      character={character}
+                      setCharacter={handleCharacterSelect}
+                    />
+                  </div>
+
+                  <div className="form-field text form-field--full">
+                    <label className="field-label" htmlFor="sticker-text">
+                      Sticker text
+                    </label>
+                    <TextArea
+                      id="sticker-text"
+                      size="2"
+                      placeholder="Type the sticker text"
+                      value={text}
+                      onChange={(e) => setText(e.target.value)}
+                      className="text-input"
+                    />
+                  </div>
+
+                  <div className="control-row">
+                    <label className="field-label field-label--inline" htmlFor="font-select">
+                      Font
+                    </label>
+                    <Select.Root value={fontKey} onValueChange={setFontKey}>
+                      <Select.Trigger id="font-select" />
+                      <Select.Content>
+                        <Select.Item value="yuruka">YurukaStd</Select.Item>
+                        <Select.Item value="fangtang">SSFangTangTi</Select.Item>
+                        <Select.Item value="system">System Sans</Select.Item>
+                      </Select.Content>
+                    </Select.Root>
+                  </div>
+                </div>
+              </section>
+
+              <section className="control-section" aria-labelledby="layout-title">
+                <div className="control-section-head">
+                  <h3 id="layout-title">Layout</h3>
+                  <p>Shape the position, angle, and spacing.</p>
+                </div>
+
+                <div className="control-stack">
+                  <div className="slider-field">
+                    <div className="slider-field-head">
+                      <label className="field-label" htmlFor="rotate-slider">Rotate</label>
+                      <span>{rotate.toFixed(1)}°</span>
+                    </div>
+                    <Slider
+                      id="rotate-slider"
+                      value={[rotate]}
+                      onValueChange={([v]) => setRotate(v)}
+                      min={-10}
+                      max={10}
+                      step={0.2}
+                    />
+                  </div>
+
+                  <div className="slider-field">
+                    <div className="slider-field-head">
+                      <label className="field-label" htmlFor="font-size-slider">Font size</label>
+                      <span>{fontSize}px</span>
+                    </div>
+                    <Slider
+                      id="font-size-slider"
+                      value={[fontSize]}
+                      onValueChange={([v]) => setFontSize(v)}
+                      min={10}
+                      max={100}
+                      step={1}
+                    />
+                  </div>
+
+                  <div className="slider-field">
+                    <div className="slider-field-head">
+                      <label className="field-label" htmlFor="spacing-slider">Line spacing</label>
+                      <span>{spaceSize}px</span>
+                    </div>
+                    <Slider
+                      id="spacing-slider"
+                      value={[spaceSize]}
+                      onValueChange={([v]) => setSpaceSize(v)}
+                      min={18}
+                      max={100}
+                      step={1}
+                    />
+                  </div>
+
+                  <div className="slider-field">
+                    <div className="slider-field-head">
+                      <label className="field-label" htmlFor="letter-spacing-slider">
+                        Letter spacing
+                      </label>
+                      <span>{letterSpacing}px</span>
+                    </div>
+                    <Slider
+                      id="letter-spacing-slider"
+                      value={[letterSpacing]}
+                      onValueChange={([v]) => setLetterSpacing(v)}
+                      min={-10}
+                      max={30}
+                      step={1}
+                    />
+                  </div>
+
+                  <div className="toggle-grid">
+                    <div className="toggle-row">
+                      <div>
+                        <label className="field-label" htmlFor="curve-toggle">Curve text</label>
+                        <p className="toggle-help">Wrap text around an arc.</p>
+                      </div>
+                      <Switch id="curve-toggle" checked={curve} onCheckedChange={setCurve} />
+                    </div>
+
+                    <div className="toggle-row">
+                      <div>
+                        <label className="field-label" htmlFor="vertical-toggle">Vertical text</label>
+                        <p className="toggle-help">Stack characters top to bottom.</p>
+                      </div>
+                      <Switch
+                        id="vertical-toggle"
+                        checked={vertical}
+                        onCheckedChange={setVertical}
+                      />
+                    </div>
+
+                    <div className="toggle-row">
+                      <div>
+                        <label className="field-label" htmlFor="behind-toggle">Text behind image</label>
+                        <p className="toggle-help">Place the sticker in front of the text.</p>
+                      </div>
+                      <Switch
+                        id="behind-toggle"
+                        checked={textBehind}
+                        onCheckedChange={setTextBehind}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section className="control-section" aria-labelledby="style-title">
+                <div className="control-section-head">
+                  <h3 id="style-title">Style</h3>
+                  <p>Control color, outline, and custom artwork.</p>
+                </div>
+
+                <div className="control-stack">
+                  <div className="slider-field">
+                    <div className="slider-field-head">
+                      <label className="field-label" htmlFor="stroke-width-slider">Stroke width</label>
+                      <span>{strokeWidth}px</span>
+                    </div>
+                    <Slider
+                      id="stroke-width-slider"
+                      value={[strokeWidth]}
+                      onValueChange={([v]) => setStrokeWidth(v)}
+                      min={0}
+                      max={30}
+                      step={0.5}
+                    />
+                  </div>
+
+                  <div className="control-row control-row--color">
+                    <div>
+                      <label className="field-label" htmlFor="text-color">Text color</label>
+                      <p className="toggle-help">Use the character accent or pick your own.</p>
+                    </div>
+                    <div className="color-control-group">
+                      <input
+                        id="text-color"
+                        className="color-swatch"
+                        type="color"
+                        value={textColor}
+                        onChange={(e) => setTextColor(e.target.value)}
+                        aria-label="Text color"
+                      />
+                      <Button
+                        size="2"
+                        variant="soft"
+                        color="gray"
+                        onClick={() => setTextColor(character.color)}
+                      >
+                        Reset
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="control-row control-row--color">
+                    <div>
+                      <label className="field-label" htmlFor="stroke-color">Stroke color</label>
+                      <p className="toggle-help">Outline color for better contrast.</p>
+                    </div>
+                    <div className="color-control-group">
+                      <input
+                        id="stroke-color"
+                        className="color-swatch"
+                        type="color"
+                        value={strokeColor}
+                        onChange={(e) => setStrokeColor(e.target.value)}
+                        aria-label="Stroke color"
+                      />
+                      <Button
+                        size="2"
+                        variant="soft"
+                        color="gray"
+                        onClick={() => setStrokeColor("#ffffff")}
+                      >
+                        Reset
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="control-row control-row--upload">
+                    <div>
+                      <label className="field-label" htmlFor="custom-image">Custom image</label>
+                      <p className="toggle-help">Replace the character art with your own image.</p>
+                    </div>
+                    <div className="upload-control-group">
+                      <input
+                        id="custom-image"
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/*"
+                        onChange={handleUpload}
+                        aria-label="Custom image upload"
+                        style={{ display: "none" }}
+                      />
+                      <Button size="2" variant="soft" color="gray" onClick={triggerUpload}>
+                        Upload
+                      </Button>
+                      {customImage && (
+                        <Button size="2" variant="soft" color="gray" onClick={clearUpload}>
+                          Clear
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section className="control-section export-section" aria-labelledby="export-title">
+                <div className="control-section-head">
+                  <h3 id="export-title">Export</h3>
+                  <p>Copy fast on mobile, or save a file locally.</p>
+                </div>
+
+                <div className="export-grid">
+                  <Button size="3" onClick={copy}>Copy PNG</Button>
+                  <Button size="3" variant="soft" onClick={copyWithBg}>
+                    Copy JPG
+                  </Button>
+                  <Button size="3" variant="soft" onClick={download}>
+                    Save PNG
+                  </Button>
+                  <Button size="3" variant="soft" onClick={downloadJpg}>
+                    Save JPG
+                  </Button>
+                  <Button className="export-wide" size="3" variant="soft" onClick={downloadWebp}>
+                    Save WEBP
+                  </Button>
+                </div>
+              </section>
+            </div>
+          </section>
         </div>
-        <div className="footer">
-          <Info />
-        </div>
+      </div>
+
+      <div className="mobile-action-bar">
+        <Button size="3" onClick={copy}>Copy PNG</Button>
+        <Button size="3" variant="soft" onClick={download}>
+          Save PNG
+        </Button>
       </div>
     </main>
   );

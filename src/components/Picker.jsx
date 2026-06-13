@@ -1,16 +1,11 @@
-import {
-  Button,
-  Popover,
-  Tabs,
-  TextField,
-} from "@radix-ui/themes";
+import { Button, Popover, Tabs, TextField } from "@radix-ui/themes";
 import { useState, useMemo, useCallback } from "react";
 import characters from "../characters.json";
 import charactersSC from "../characters-sc.json";
 
 export default function Picker({
+  character,
   setCharacter,
-  secondaryCharacters = charactersSC,
 }) {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
@@ -18,8 +13,9 @@ export default function Picker({
 
   const createImageListItems = useCallback(
     (data) => {
+      const safeData = Array.isArray(data) ? data : [];
       const s = search.toLowerCase();
-      return data.map((c, index) => {
+      return safeData.map((c, index) => {
         if (
           s === c.id ||
           c.name.toLowerCase().includes(s) ||
@@ -40,6 +36,8 @@ export default function Picker({
                 srcSet={`/img/${c.img}`}
                 alt={c.name}
                 loading="lazy"
+                width="296"
+                height="256"
               />
             </button>
           );
@@ -56,30 +54,39 @@ export default function Picker({
   );
 
   const memoizedSecondaryImageListItems = useMemo(
-    () =>
-      secondaryCharacters ? createImageListItems(secondaryCharacters) : [],
-    [secondaryCharacters, createImageListItems]
+    () => createImageListItems(charactersSC),
+    [createImageListItems]
   );
 
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
       <Popover.Trigger>
-        <Button size="3" color="gray">
-          Pick character
+        <Button size="3">
+          <span className="picker-trigger-content">
+            {character && (
+              <img
+                src={`/img/${character.img}`}
+                alt=""
+                aria-hidden="true"
+                width="28"
+                height="28"
+                className="picker-trigger-avatar"
+              />
+            )}
+            <span>{character ? character.name : "Pick character"}</span>
+          </span>
         </Button>
       </Popover.Trigger>
       <Popover.Content className="picker-popover modal" align="start">
         <Tabs.Root value={tabValue} onValueChange={setTabValue}>
           <Tabs.List aria-label="character tabs">
             <Tabs.Trigger value="0">Project Sekai</Tabs.Trigger>
-            {secondaryCharacters && (
-              <Tabs.Trigger value="1">Shiny Colors</Tabs.Trigger>
-            )}
+            <Tabs.Trigger value="1">Shiny Colors</Tabs.Trigger>
           </Tabs.List>
           <div className="picker-search">
             <TextField.Root
               size="2"
-              className="w-full"
+              className="text-input"
               placeholder="Search character"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -91,13 +98,11 @@ export default function Picker({
                 {memoizedImageListItems}
               </div>
             </Tabs.Content>
-            {secondaryCharacters && (
-              <Tabs.Content value="1">
-                <div className="image-grid picker-char-grid">
-                  {memoizedSecondaryImageListItems}
-                </div>
-              </Tabs.Content>
-            )}
+            <Tabs.Content value="1">
+              <div className="image-grid picker-char-grid">
+                {memoizedSecondaryImageListItems}
+              </div>
+            </Tabs.Content>
           </div>
         </Tabs.Root>
       </Popover.Content>

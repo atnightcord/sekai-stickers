@@ -407,8 +407,8 @@ function App() {
             </div>
 
             <div className="preview-stage">
-              <div className="vertical preview-canvas-stack">
-                <div className="canvas-shell">
+              <div className="axis-grid">
+                <div className="axis-grid-canvas">
                   <div className="canvas" role="img" aria-label="Sticker preview canvas">
                     <Canvas
                       draw={draw}
@@ -420,6 +420,7 @@ function App() {
                     {!loaded && <div className="canvas-loading">Loading sticker…</div>}
                   </div>
                 </div>
+
                 <Slider
                   className="slider-vertical"
                   value={[
@@ -436,13 +437,7 @@ function App() {
                   step={1}
                   orientation="vertical"
                 />
-              </div>
 
-              <div className="horizontal preview-axis-control">
-                <div className="axis-label-row">
-                  <span>Horizontal position</span>
-                  <span>{Math.round(position.x)} px</span>
-                </div>
                 <Slider
                   className="slider-horizontal"
                   value={[position.x]}
@@ -451,6 +446,8 @@ function App() {
                   max={296}
                   step={1}
                 />
+
+                <div className="axis-grid-empty" />
               </div>
             </div>
 

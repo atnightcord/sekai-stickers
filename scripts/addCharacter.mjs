@@ -40,7 +40,7 @@ async function main() {
     let scanDirInput = process.argv[2];
     if (!scanDirInput) {
       scanDirInput = await question(
-        "请输入扫描文件夹路径 (Enter scan directory path): "
+        "请输入扫描文件夹路径 (Enter scan directory path): ",
       );
     }
     const scanDir = path.resolve(process.cwd(), scanDirInput);
@@ -51,7 +51,7 @@ async function main() {
     }
 
     const characterName = await question(
-      "请输入角色名称 (Enter Character name): "
+      "请输入角色名称 (Enter Character name): ",
     );
     const color = await question("请输入颜色 (Enter Color, e.g. #FFFFFF): ");
 
@@ -105,7 +105,7 @@ async function main() {
     fs.writeFileSync(charactersPath, JSON.stringify(charactersData, null, 4));
 
     console.log(
-      `Successfully added ${newEntries.length} characters to characters.json`
+      `Successfully added ${newEntries.length} characters to characters.json`,
     );
   } catch (error) {
     console.error("Error:", error);

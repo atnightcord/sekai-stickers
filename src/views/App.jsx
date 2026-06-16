@@ -47,11 +47,11 @@ function App() {
 
   const textBlossomValue = useMemo(
     () => hexToBlossomValue(textColor),
-    [textColor]
+    [textColor],
   );
   const strokeBlossomValue = useMemo(
     () => hexToBlossomValue(strokeColor),
-    [strokeColor]
+    [strokeColor],
   );
 
   const applyCharacterDefaults = (selectedCharacter) => {

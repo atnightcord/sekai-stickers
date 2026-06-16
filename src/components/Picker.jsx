@@ -3,10 +3,7 @@ import { useState, useMemo, useCallback } from "react";
 import characters from "../characters.json";
 import charactersSC from "../characters-sc.json";
 
-export default function Picker({
-  character,
-  setCharacter,
-}) {
+export default function Picker({ character, setCharacter }) {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [tabValue, setTabValue] = useState("0");
@@ -45,17 +42,17 @@ export default function Picker({
         return null;
       });
     },
-    [search, setCharacter]
+    [search, setCharacter],
   );
 
   const memoizedImageListItems = useMemo(
     () => createImageListItems(characters),
-    [createImageListItems]
+    [createImageListItems],
   );
 
   const memoizedSecondaryImageListItems = useMemo(
     () => createImageListItems(charactersSC),
-    [createImageListItems]
+    [createImageListItems],
   );
 
   return (

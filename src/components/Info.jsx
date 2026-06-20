@@ -23,7 +23,7 @@ export default function Info() {
             <Avatar
               size="3"
               fallback="M"
-              radius="full"
+              radius="none"
               src="https://avatars.githubusercontent.com/u/13678847?v=4"
             />
             <Box>

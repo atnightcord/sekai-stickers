@@ -1,6 +1,6 @@
 import "../assets/main.css";
 import Canvas from "../components/Canvas";
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo, useLayoutEffect } from "react";
 import { BlossomColorPicker } from "@dayflow/blossom-color-picker-react";
 import "@dayflow/blossom-color-picker/styles.css";
 import { hexToBlossomValue } from "../utils/blossomColor";
@@ -44,6 +44,7 @@ function App() {
   const lastPos = useRef({ x: 0, y: 0 });
   const fileInputRef = useRef(null);
   const imgRef = useRef(null);
+  const textAreaRef = useRef(null);
 
   const textBlossomValue = useMemo(
     () => hexToBlossomValue(textColor),
@@ -156,6 +157,16 @@ function App() {
     setTextBehind(false);
     setLetterSpacing(0);
   };
+
+  const syncTextAreaHeight = (element) => {
+    if (!element) return;
+    element.style.height = "auto";
+    element.style.height = `${element.scrollHeight}px`;
+  };
+
+  useLayoutEffect(() => {
+    syncTextAreaHeight(textAreaRef.current);
+  }, [text]);
 
   useEffect(() => {
     let cancelled = false;
@@ -363,12 +374,7 @@ function App() {
       <div className="app-chrome">
         <header className="app-header">
           <div className="app-header-copy">
-            <p className="app-eyebrow">Sekai Stickers</p>
-            <h1 className="app-title">Make a sticker in seconds</h1>
-            <p className="app-subtitle">
-              Pick a character, type your line, drag the text into place, then
-              copy or save the result.
-            </p>
+            <h1 className="app-title">Sekai Stickers</h1>
           </div>
           <div className="app-header-actions">
             <Info />
@@ -469,10 +475,15 @@ function App() {
                     </label>
                     <TextArea
                       id="sticker-text"
+                      ref={textAreaRef}
                       size="2"
+                      rows={2}
                       placeholder="Type the sticker text"
                       value={text}
-                      onChange={(e) => setText(e.target.value)}
+                      onChange={(e) => {
+                        setText(e.target.value);
+                        syncTextAreaHeight(e.target);
+                      }}
                       className="text-input"
                     />
                   </div>

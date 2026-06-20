@@ -181,7 +181,7 @@
   position: relative;
   display: block;
   width: 100%;
-  border-radius: calc(var(--radius-lg) - 6px);
+  border-radius: 0;
   overflow: hidden;
 }
 
@@ -189,7 +189,7 @@
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 16px;
+  border-radius: 0;
 }
 
 .canvas-loading {
@@ -214,18 +214,18 @@
 .axis-grid .slider-vertical .rt-SliderTrack[data-orientation="vertical"] {
   width: 3px;
   background: var(--border);
-  border-radius: 2px;
+  border-radius: 0;
 }
 
 .axis-grid .slider-vertical .rt-SliderRange[data-orientation="vertical"] {
   background: var(--brand);
-  border-radius: 2px;
+  border-radius: 0;
 }
 
 .axis-grid .slider-vertical .rt-SliderThumb[data-orientation="vertical"] {
   width: 10px;
   height: 10px;
-  border-radius: 50%;
+  border-radius: 0;
   background: var(--brand);
   border: 2px solid #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
@@ -240,18 +240,18 @@
 .axis-grid .slider-horizontal .rt-SliderTrack[data-orientation="horizontal"] {
   height: 3px;
   background: var(--border);
-  border-radius: 2px;
+  border-radius: 0;
 }
 
 .axis-grid .slider-horizontal .rt-SliderRange[data-orientation="horizontal"] {
   background: var(--brand);
-  border-radius: 2px;
+  border-radius: 0;
 }
 
 .axis-grid .slider-horizontal .rt-SliderThumb[data-orientation="horizontal"] {
   width: 10px;
   height: 10px;
-  border-radius: 50%;
+  border-radius: 0;
   background: var(--brand);
   border: 2px solid #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
@@ -301,6 +301,11 @@
   color: var(--ink);
 }
 
+.text-input .rt-TextAreaInput {
+  resize: none;
+  overflow: hidden;
+}
+
 .field-label--inline {
   flex: none;
 }
@@ -347,7 +352,7 @@
 .picker-trigger-avatar {
   width: 1.75rem;
   height: 1.75rem;
-  border-radius: 999px;
+  border-radius: 0;
   object-fit: cover;
 }
 
@@ -387,7 +392,7 @@
 
 .image-grid {
   margin: 0 0.75rem 0.75rem;
-  border-radius: 0.75rem;
+  border-radius: 0;
 }
 
 .picker-char-grid {
@@ -408,7 +413,7 @@
     rgba(255, 255, 255, 0.98),
     rgba(255, 244, 249, 0.84)
   );
-  border-radius: 0.9rem;
+  border-radius: 0;
   overflow: hidden;
   transition:
     transform 180ms ease,
@@ -479,7 +484,7 @@
 
 ::-webkit-scrollbar-thumb {
   background-color: rgba(197, 86, 147, 0.5);
-  border-radius: 999px;
+  border-radius: 0;
   min-height: 2rem;
 }
 

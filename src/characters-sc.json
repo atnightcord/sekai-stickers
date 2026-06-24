@@ -1,1122 +1,1122 @@
 [
-    {
-        "id": "1",
-        "name": "Amana 00",
-        "character": "Amana",
-        "img": "../imgsc/Amana/amana_01.png",
-        "color": "#f54275",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "2",
-        "name": "Asahi 00",
-        "character": "Asahi",
-        "img": "../imgsc/Asahi/asahi_01.png",
-        "color": "#f30100",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "3",
-        "name": "Chiyoko 00",
-        "character": "Chiyoko",
-        "img": "../imgsc/Chiyoko/chiyoko_01.png",
-        "color": "#f93b90",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "4",
-        "name": "Chiyuki 00",
-        "character": "Chiyuki",
-        "img": "../imgsc/Chiyuki/chiyuki_01.png",
-        "color": "#fbfafa",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "5",
-        "name": "Fuyuko 00",
-        "character": "Fuyuko",
-        "img": "../imgsc/Fuyuko/fuyuko_01.png",
-        "color": "#5ce626",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "6",
-        "name": "Haduki 00",
-        "character": "Haduki",
-        "img": "../imgsc/Haduki/haduki_01.png",
-        "color": "#c3d825",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "7",
-        "name": "Haduki 01",
-        "character": "Haduki",
-        "img": "../imgsc/Haduki/haduki_02.png",
-        "color": "#c3d825",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "8",
-        "name": "Haduki 02",
-        "character": "Haduki",
-        "img": "../imgsc/Haduki/haduki_03.png",
-        "color": "#c3d825",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "9",
-        "name": "Hinana 00",
-        "character": "Hinana",
-        "img": "../imgsc/Hinana/emo_e20000103_0.png",
-        "color": "#ffc639",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "10",
-        "name": "Hinana 01",
-        "character": "Hinana",
-        "img": "../imgsc/Hinana/emo_e20000103_1.png",
-        "color": "#ffc639",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "11",
-        "name": "Hinana 02",
-        "character": "Hinana",
-        "img": "../imgsc/Hinana/emo_e20000103_10.png",
-        "color": "#ffc639",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "12",
-        "name": "Hinana 03",
-        "character": "Hinana",
-        "img": "../imgsc/Hinana/emo_e20000103_11.png",
-        "color": "#ffc639",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "13",
-        "name": "Hinana 04",
-        "character": "Hinana",
-        "img": "../imgsc/Hinana/emo_e20000103_12.png",
-        "color": "#ffc639",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "14",
-        "name": "Hinana 05",
-        "character": "Hinana",
-        "img": "../imgsc/Hinana/emo_e20000103_2.png",
-        "color": "#ffc639",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "15",
-        "name": "Hinana 06",
-        "character": "Hinana",
-        "img": "../imgsc/Hinana/emo_e20000103_3.png",
-        "color": "#ffc639",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "16",
-        "name": "Hinana 07",
-        "character": "Hinana",
-        "img": "../imgsc/Hinana/emo_e20000103_4.png",
-        "color": "#ffc639",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "17",
-        "name": "Hinana 08",
-        "character": "Hinana",
-        "img": "../imgsc/Hinana/emo_e20000103_5.png",
-        "color": "#ffc639",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "18",
-        "name": "Hinana 09",
-        "character": "Hinana",
-        "img": "../imgsc/Hinana/emo_e20000103_6.png",
-        "color": "#ffc639",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "19",
-        "name": "Hinana 10",
-        "character": "Hinana",
-        "img": "../imgsc/Hinana/emo_e20000103_7.png",
-        "color": "#ffc639",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "20",
-        "name": "Hinana 11",
-        "character": "Hinana",
-        "img": "../imgsc/Hinana/emo_e20000103_8.png",
-        "color": "#ffc639",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "21",
-        "name": "Hinana 12",
-        "character": "Hinana",
-        "img": "../imgsc/Hinana/emo_e20000103_945.png",
-        "color": "#ffc639",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "22",
-        "name": "Hinana 13",
-        "character": "Hinana",
-        "img": "../imgsc/Hinana/hinana_01.png",
-        "color": "#ffc639",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "23",
-        "name": "Hinana 14",
-        "character": "Hinana",
-        "img": "../imgsc/Hinana/hinana_02.png",
-        "color": "#ffc639",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "24",
-        "name": "Hiori 00",
-        "character": "Hiori",
-        "img": "../imgsc/Hiori/hiori_01.png",
-        "color": "#144384",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "25",
-        "name": "Hiori 01",
-        "character": "Hiori",
-        "img": "../imgsc/Hiori/hiori_02.png",
-        "color": "#144384",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "26",
-        "name": "Juri 00",
-        "character": "Juri",
-        "img": "../imgsc/Juri/juri_01.png",
-        "color": "#ffc602",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "27",
-        "name": "Kaho 00",
-        "character": "Kaho",
-        "img": "../imgsc/Kaho/kaho_01.png",
-        "color": "#e5461c",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "28",
-        "name": "Kiriko 00",
-        "character": "Kiriko",
-        "img": "../imgsc/Kiriko/kiriko_01.png",
-        "color": "#d9f2ff",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "29",
-        "name": "Kogane 00",
-        "character": "Kogane",
-        "img": "../imgsc/Kogane/kogane_01.png",
-        "color": "#f84cad",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "30",
-        "name": "Kogane 01",
-        "character": "Kogane",
-        "img": "../imgsc/Kogane/kogane_02.png",
-        "color": "#f84cad",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "31",
-        "name": "Koito 00",
-        "character": "Koito",
-        "img": "../imgsc/Koito/emo_e20000102_0.png",
-        "color": "#7967c3",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "32",
-        "name": "Koito 01",
-        "character": "Koito",
-        "img": "../imgsc/Koito/emo_e20000102_1.png",
-        "color": "#7967c3",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "33",
-        "name": "Koito 02",
-        "character": "Koito",
-        "img": "../imgsc/Koito/emo_e20000102_10.png",
-        "color": "#7967c3",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "34",
-        "name": "Koito 03",
-        "character": "Koito",
-        "img": "../imgsc/Koito/emo_e20000102_11.png",
-        "color": "#7967c3",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "35",
-        "name": "Koito 04",
-        "character": "Koito",
-        "img": "../imgsc/Koito/emo_e20000102_12.png",
-        "color": "#7967c3",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "36",
-        "name": "Koito 05",
-        "character": "Koito",
-        "img": "../imgsc/Koito/emo_e20000102_2.png",
-        "color": "#7967c3",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "37",
-        "name": "Koito 06",
-        "character": "Koito",
-        "img": "../imgsc/Koito/emo_e20000102_3.png",
-        "color": "#7967c3",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "38",
-        "name": "Koito 07",
-        "character": "Koito",
-        "img": "../imgsc/Koito/emo_e20000102_4.png",
-        "color": "#7967c3",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "39",
-        "name": "Koito 08",
-        "character": "Koito",
-        "img": "../imgsc/Koito/emo_e20000102_5.png",
-        "color": "#7967c3",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "40",
-        "name": "Koito 09",
-        "character": "Koito",
-        "img": "../imgsc/Koito/emo_e20000102_6.png",
-        "color": "#7967c3",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "41",
-        "name": "Koito 10",
-        "character": "Koito",
-        "img": "../imgsc/Koito/emo_e20000102_7.png",
-        "color": "#7967c3",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "42",
-        "name": "Koito 11",
-        "character": "Koito",
-        "img": "../imgsc/Koito/emo_e20000102_8.png",
-        "color": "#7967c3",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "43",
-        "name": "Koito 12",
-        "character": "Koito",
-        "img": "../imgsc/Koito/emo_e20000102_945.png",
-        "color": "#7967c3",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "44",
-        "name": "Madoka 00",
-        "character": "Madoka",
-        "img": "../imgsc/Madoka/emo_e20000101_0.png",
-        "color": "#be1e3e",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "45",
-        "name": "Madoka 01",
-        "character": "Madoka",
-        "img": "../imgsc/Madoka/emo_e20000101_1.png",
-        "color": "#be1e3e",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "46",
-        "name": "Madoka 02",
-        "character": "Madoka",
-        "img": "../imgsc/Madoka/emo_e20000101_10.png",
-        "color": "#be1e3e",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "47",
-        "name": "Madoka 03",
-        "character": "Madoka",
-        "img": "../imgsc/Madoka/emo_e20000101_11.png",
-        "color": "#be1e3e",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "48",
-        "name": "Madoka 04",
-        "character": "Madoka",
-        "img": "../imgsc/Madoka/emo_e20000101_12.png",
-        "color": "#be1e3e",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "49",
-        "name": "Madoka 05",
-        "character": "Madoka",
-        "img": "../imgsc/Madoka/emo_e20000101_2.png",
-        "color": "#be1e3e",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "50",
-        "name": "Madoka 06",
-        "character": "Madoka",
-        "img": "../imgsc/Madoka/emo_e20000101_3.png",
-        "color": "#be1e3e",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "51",
-        "name": "Madoka 07",
-        "character": "Madoka",
-        "img": "../imgsc/Madoka/emo_e20000101_4.png",
-        "color": "#be1e3e",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "52",
-        "name": "Madoka 08",
-        "character": "Madoka",
-        "img": "../imgsc/Madoka/emo_e20000101_5.png",
-        "color": "#be1e3e",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "53",
-        "name": "Madoka 09",
-        "character": "Madoka",
-        "img": "../imgsc/Madoka/emo_e20000101_6.png",
-        "color": "#be1e3e",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "54",
-        "name": "Madoka 10",
-        "character": "Madoka",
-        "img": "../imgsc/Madoka/emo_e20000101_7.png",
-        "color": "#be1e3e",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "55",
-        "name": "Madoka 11",
-        "character": "Madoka",
-        "img": "../imgsc/Madoka/emo_e20000101_8.png",
-        "color": "#be1e3e",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "56",
-        "name": "Madoka 12",
-        "character": "Madoka",
-        "img": "../imgsc/Madoka/emo_e20000101_945.png",
-        "color": "#be1e3e",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "57",
-        "name": "Mamimi 00",
-        "character": "Mamimi",
-        "img": "../imgsc/Mamimi/mamimi_01.png",
-        "color": "#a846fb",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "58",
-        "name": "Mano 00",
-        "character": "Mano",
-        "img": "../imgsc/Mano/mano_01.png",
-        "color": "#ffbad6",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "59",
-        "name": "Mano 01",
-        "character": "Mano",
-        "img": "../imgsc/Mano/mano_02.png",
-        "color": "#ffbad6",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "60",
-        "name": "Meguru 00",
-        "character": "Meguru",
-        "img": "../imgsc/Meguru/meguru_01.png",
-        "color": "#ffe012",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "61",
-        "name": "Meguru 01",
-        "character": "Meguru",
-        "img": "../imgsc/Meguru/meguru_02.png",
-        "color": "#ffe012",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "62",
-        "name": "Mei 00",
-        "character": "Mei",
-        "img": "../imgsc/Mei/mei_01.png",
-        "color": "#ff00ff",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "63",
-        "name": "Natsuha 00",
-        "character": "Natsuha",
-        "img": "../imgsc/Natsuha/natsuha_01.png",
-        "color": "#90e667",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "64",
-        "name": "Rinze 00",
-        "character": "Rinze",
-        "img": "../imgsc/Rinze/rinze_01.png",
-        "color": "#89c3eb",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "65",
-        "name": "Sakuya 00",
-        "character": "Sakuya",
-        "img": "../imgsc/Sakuya/sakuya_01.png",
-        "color": "#006047",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "66",
-        "name": "Tenka 00",
-        "character": "Tenka",
-        "img": "../imgsc/Tenka/tenka_01.png",
-        "color": "#f54275",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "67",
-        "name": "Toru 00",
-        "character": "Toru",
-        "img": "../imgsc/Toru/emo_e20000100_0.png",
-        "color": "#50d0d0",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "68",
-        "name": "Toru 01",
-        "character": "Toru",
-        "img": "../imgsc/Toru/emo_e20000100_1.png",
-        "color": "#50d0d0",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "69",
-        "name": "Toru 02",
-        "character": "Toru",
-        "img": "../imgsc/Toru/emo_e20000100_10.png",
-        "color": "#50d0d0",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "70",
-        "name": "Toru 03",
-        "character": "Toru",
-        "img": "../imgsc/Toru/emo_e20000100_11.png",
-        "color": "#50d0d0",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "71",
-        "name": "Toru 04",
-        "character": "Toru",
-        "img": "../imgsc/Toru/emo_e20000100_12.png",
-        "color": "#50d0d0",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "72",
-        "name": "Toru 05",
-        "character": "Toru",
-        "img": "../imgsc/Toru/emo_e20000100_2.png",
-        "color": "#50d0d0",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "73",
-        "name": "Toru 06",
-        "character": "Toru",
-        "img": "../imgsc/Toru/emo_e20000100_3.png",
-        "color": "#50d0d0",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "74",
-        "name": "Toru 07",
-        "character": "Toru",
-        "img": "../imgsc/Toru/emo_e20000100_4.png",
-        "color": "#50d0d0",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "75",
-        "name": "Toru 08",
-        "character": "Toru",
-        "img": "../imgsc/Toru/emo_e20000100_5.png",
-        "color": "#50d0d0",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "76",
-        "name": "Toru 09",
-        "character": "Toru",
-        "img": "../imgsc/Toru/emo_e20000100_6.png",
-        "color": "#50d0d0",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "77",
-        "name": "Toru 10",
-        "character": "Toru",
-        "img": "../imgsc/Toru/emo_e20000100_7.png",
-        "color": "#50d0d0",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "78",
-        "name": "Toru 11",
-        "character": "Toru",
-        "img": "../imgsc/Toru/emo_e20000100_8.png",
-        "color": "#50d0d0",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "79",
-        "name": "Toru 12",
-        "character": "Toru",
-        "img": "../imgsc/Toru/emo_e20000100_945.png",
-        "color": "#50d0d0",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
-    },
-    {
-        "id": "80",
-        "name": "Yuika 00",
-        "character": "Yuika",
-        "img": "../imgsc/Yuika/yuika_01.png",
-        "color": "#3b91c4",
-        "defaultText": {
-            "text": "something",
-            "x": 148,
-            "y": 58,
-            "r": -2,
-            "s": 47
-        }
+  {
+    "id": "1",
+    "name": "Amana 00",
+    "character": "Amana",
+    "img": "../imgsc/Amana/amana_01.png",
+    "color": "#f54275",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
     }
+  },
+  {
+    "id": "2",
+    "name": "Asahi 00",
+    "character": "Asahi",
+    "img": "../imgsc/Asahi/asahi_01.png",
+    "color": "#f30100",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "3",
+    "name": "Chiyoko 00",
+    "character": "Chiyoko",
+    "img": "../imgsc/Chiyoko/chiyoko_01.png",
+    "color": "#f93b90",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "4",
+    "name": "Chiyuki 00",
+    "character": "Chiyuki",
+    "img": "../imgsc/Chiyuki/chiyuki_01.png",
+    "color": "#fbfafa",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "5",
+    "name": "Fuyuko 00",
+    "character": "Fuyuko",
+    "img": "../imgsc/Fuyuko/fuyuko_01.png",
+    "color": "#5ce626",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "6",
+    "name": "Haduki 00",
+    "character": "Haduki",
+    "img": "../imgsc/Haduki/haduki_01.png",
+    "color": "#c3d825",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "7",
+    "name": "Haduki 01",
+    "character": "Haduki",
+    "img": "../imgsc/Haduki/haduki_02.png",
+    "color": "#c3d825",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "8",
+    "name": "Haduki 02",
+    "character": "Haduki",
+    "img": "../imgsc/Haduki/haduki_03.png",
+    "color": "#c3d825",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "9",
+    "name": "Hinana 00",
+    "character": "Hinana",
+    "img": "../imgsc/Hinana/emo_e20000103_0.png",
+    "color": "#ffc639",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "10",
+    "name": "Hinana 01",
+    "character": "Hinana",
+    "img": "../imgsc/Hinana/emo_e20000103_1.png",
+    "color": "#ffc639",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "11",
+    "name": "Hinana 02",
+    "character": "Hinana",
+    "img": "../imgsc/Hinana/emo_e20000103_10.png",
+    "color": "#ffc639",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "12",
+    "name": "Hinana 03",
+    "character": "Hinana",
+    "img": "../imgsc/Hinana/emo_e20000103_11.png",
+    "color": "#ffc639",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "13",
+    "name": "Hinana 04",
+    "character": "Hinana",
+    "img": "../imgsc/Hinana/emo_e20000103_12.png",
+    "color": "#ffc639",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "14",
+    "name": "Hinana 05",
+    "character": "Hinana",
+    "img": "../imgsc/Hinana/emo_e20000103_2.png",
+    "color": "#ffc639",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "15",
+    "name": "Hinana 06",
+    "character": "Hinana",
+    "img": "../imgsc/Hinana/emo_e20000103_3.png",
+    "color": "#ffc639",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "16",
+    "name": "Hinana 07",
+    "character": "Hinana",
+    "img": "../imgsc/Hinana/emo_e20000103_4.png",
+    "color": "#ffc639",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "17",
+    "name": "Hinana 08",
+    "character": "Hinana",
+    "img": "../imgsc/Hinana/emo_e20000103_5.png",
+    "color": "#ffc639",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "18",
+    "name": "Hinana 09",
+    "character": "Hinana",
+    "img": "../imgsc/Hinana/emo_e20000103_6.png",
+    "color": "#ffc639",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "19",
+    "name": "Hinana 10",
+    "character": "Hinana",
+    "img": "../imgsc/Hinana/emo_e20000103_7.png",
+    "color": "#ffc639",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "20",
+    "name": "Hinana 11",
+    "character": "Hinana",
+    "img": "../imgsc/Hinana/emo_e20000103_8.png",
+    "color": "#ffc639",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "21",
+    "name": "Hinana 12",
+    "character": "Hinana",
+    "img": "../imgsc/Hinana/emo_e20000103_945.png",
+    "color": "#ffc639",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "22",
+    "name": "Hinana 13",
+    "character": "Hinana",
+    "img": "../imgsc/Hinana/hinana_01.png",
+    "color": "#ffc639",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "23",
+    "name": "Hinana 14",
+    "character": "Hinana",
+    "img": "../imgsc/Hinana/hinana_02.png",
+    "color": "#ffc639",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "24",
+    "name": "Hiori 00",
+    "character": "Hiori",
+    "img": "../imgsc/Hiori/hiori_01.png",
+    "color": "#144384",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "25",
+    "name": "Hiori 01",
+    "character": "Hiori",
+    "img": "../imgsc/Hiori/hiori_02.png",
+    "color": "#144384",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "26",
+    "name": "Juri 00",
+    "character": "Juri",
+    "img": "../imgsc/Juri/juri_01.png",
+    "color": "#ffc602",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "27",
+    "name": "Kaho 00",
+    "character": "Kaho",
+    "img": "../imgsc/Kaho/kaho_01.png",
+    "color": "#e5461c",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "28",
+    "name": "Kiriko 00",
+    "character": "Kiriko",
+    "img": "../imgsc/Kiriko/kiriko_01.png",
+    "color": "#d9f2ff",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "29",
+    "name": "Kogane 00",
+    "character": "Kogane",
+    "img": "../imgsc/Kogane/kogane_01.png",
+    "color": "#f84cad",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "30",
+    "name": "Kogane 01",
+    "character": "Kogane",
+    "img": "../imgsc/Kogane/kogane_02.png",
+    "color": "#f84cad",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "31",
+    "name": "Koito 00",
+    "character": "Koito",
+    "img": "../imgsc/Koito/emo_e20000102_0.png",
+    "color": "#7967c3",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "32",
+    "name": "Koito 01",
+    "character": "Koito",
+    "img": "../imgsc/Koito/emo_e20000102_1.png",
+    "color": "#7967c3",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "33",
+    "name": "Koito 02",
+    "character": "Koito",
+    "img": "../imgsc/Koito/emo_e20000102_10.png",
+    "color": "#7967c3",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "34",
+    "name": "Koito 03",
+    "character": "Koito",
+    "img": "../imgsc/Koito/emo_e20000102_11.png",
+    "color": "#7967c3",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "35",
+    "name": "Koito 04",
+    "character": "Koito",
+    "img": "../imgsc/Koito/emo_e20000102_12.png",
+    "color": "#7967c3",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "36",
+    "name": "Koito 05",
+    "character": "Koito",
+    "img": "../imgsc/Koito/emo_e20000102_2.png",
+    "color": "#7967c3",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "37",
+    "name": "Koito 06",
+    "character": "Koito",
+    "img": "../imgsc/Koito/emo_e20000102_3.png",
+    "color": "#7967c3",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "38",
+    "name": "Koito 07",
+    "character": "Koito",
+    "img": "../imgsc/Koito/emo_e20000102_4.png",
+    "color": "#7967c3",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "39",
+    "name": "Koito 08",
+    "character": "Koito",
+    "img": "../imgsc/Koito/emo_e20000102_5.png",
+    "color": "#7967c3",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "40",
+    "name": "Koito 09",
+    "character": "Koito",
+    "img": "../imgsc/Koito/emo_e20000102_6.png",
+    "color": "#7967c3",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "41",
+    "name": "Koito 10",
+    "character": "Koito",
+    "img": "../imgsc/Koito/emo_e20000102_7.png",
+    "color": "#7967c3",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "42",
+    "name": "Koito 11",
+    "character": "Koito",
+    "img": "../imgsc/Koito/emo_e20000102_8.png",
+    "color": "#7967c3",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "43",
+    "name": "Koito 12",
+    "character": "Koito",
+    "img": "../imgsc/Koito/emo_e20000102_945.png",
+    "color": "#7967c3",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "44",
+    "name": "Madoka 00",
+    "character": "Madoka",
+    "img": "../imgsc/Madoka/emo_e20000101_0.png",
+    "color": "#be1e3e",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "45",
+    "name": "Madoka 01",
+    "character": "Madoka",
+    "img": "../imgsc/Madoka/emo_e20000101_1.png",
+    "color": "#be1e3e",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "46",
+    "name": "Madoka 02",
+    "character": "Madoka",
+    "img": "../imgsc/Madoka/emo_e20000101_10.png",
+    "color": "#be1e3e",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "47",
+    "name": "Madoka 03",
+    "character": "Madoka",
+    "img": "../imgsc/Madoka/emo_e20000101_11.png",
+    "color": "#be1e3e",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "48",
+    "name": "Madoka 04",
+    "character": "Madoka",
+    "img": "../imgsc/Madoka/emo_e20000101_12.png",
+    "color": "#be1e3e",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "49",
+    "name": "Madoka 05",
+    "character": "Madoka",
+    "img": "../imgsc/Madoka/emo_e20000101_2.png",
+    "color": "#be1e3e",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "50",
+    "name": "Madoka 06",
+    "character": "Madoka",
+    "img": "../imgsc/Madoka/emo_e20000101_3.png",
+    "color": "#be1e3e",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "51",
+    "name": "Madoka 07",
+    "character": "Madoka",
+    "img": "../imgsc/Madoka/emo_e20000101_4.png",
+    "color": "#be1e3e",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "52",
+    "name": "Madoka 08",
+    "character": "Madoka",
+    "img": "../imgsc/Madoka/emo_e20000101_5.png",
+    "color": "#be1e3e",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "53",
+    "name": "Madoka 09",
+    "character": "Madoka",
+    "img": "../imgsc/Madoka/emo_e20000101_6.png",
+    "color": "#be1e3e",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "54",
+    "name": "Madoka 10",
+    "character": "Madoka",
+    "img": "../imgsc/Madoka/emo_e20000101_7.png",
+    "color": "#be1e3e",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "55",
+    "name": "Madoka 11",
+    "character": "Madoka",
+    "img": "../imgsc/Madoka/emo_e20000101_8.png",
+    "color": "#be1e3e",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "56",
+    "name": "Madoka 12",
+    "character": "Madoka",
+    "img": "../imgsc/Madoka/emo_e20000101_945.png",
+    "color": "#be1e3e",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "57",
+    "name": "Mamimi 00",
+    "character": "Mamimi",
+    "img": "../imgsc/Mamimi/mamimi_01.png",
+    "color": "#a846fb",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "58",
+    "name": "Mano 00",
+    "character": "Mano",
+    "img": "../imgsc/Mano/mano_01.png",
+    "color": "#ffbad6",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "59",
+    "name": "Mano 01",
+    "character": "Mano",
+    "img": "../imgsc/Mano/mano_02.png",
+    "color": "#ffbad6",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "60",
+    "name": "Meguru 00",
+    "character": "Meguru",
+    "img": "../imgsc/Meguru/meguru_01.png",
+    "color": "#ffe012",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "61",
+    "name": "Meguru 01",
+    "character": "Meguru",
+    "img": "../imgsc/Meguru/meguru_02.png",
+    "color": "#ffe012",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "62",
+    "name": "Mei 00",
+    "character": "Mei",
+    "img": "../imgsc/Mei/mei_01.png",
+    "color": "#ff00ff",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "63",
+    "name": "Natsuha 00",
+    "character": "Natsuha",
+    "img": "../imgsc/Natsuha/natsuha_01.png",
+    "color": "#90e667",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "64",
+    "name": "Rinze 00",
+    "character": "Rinze",
+    "img": "../imgsc/Rinze/rinze_01.png",
+    "color": "#89c3eb",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "65",
+    "name": "Sakuya 00",
+    "character": "Sakuya",
+    "img": "../imgsc/Sakuya/sakuya_01.png",
+    "color": "#006047",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "66",
+    "name": "Tenka 00",
+    "character": "Tenka",
+    "img": "../imgsc/Tenka/tenka_01.png",
+    "color": "#f54275",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "67",
+    "name": "Toru 00",
+    "character": "Toru",
+    "img": "../imgsc/Toru/emo_e20000100_0.png",
+    "color": "#50d0d0",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "68",
+    "name": "Toru 01",
+    "character": "Toru",
+    "img": "../imgsc/Toru/emo_e20000100_1.png",
+    "color": "#50d0d0",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "69",
+    "name": "Toru 02",
+    "character": "Toru",
+    "img": "../imgsc/Toru/emo_e20000100_10.png",
+    "color": "#50d0d0",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "70",
+    "name": "Toru 03",
+    "character": "Toru",
+    "img": "../imgsc/Toru/emo_e20000100_11.png",
+    "color": "#50d0d0",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "71",
+    "name": "Toru 04",
+    "character": "Toru",
+    "img": "../imgsc/Toru/emo_e20000100_12.png",
+    "color": "#50d0d0",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "72",
+    "name": "Toru 05",
+    "character": "Toru",
+    "img": "../imgsc/Toru/emo_e20000100_2.png",
+    "color": "#50d0d0",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "73",
+    "name": "Toru 06",
+    "character": "Toru",
+    "img": "../imgsc/Toru/emo_e20000100_3.png",
+    "color": "#50d0d0",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "74",
+    "name": "Toru 07",
+    "character": "Toru",
+    "img": "../imgsc/Toru/emo_e20000100_4.png",
+    "color": "#50d0d0",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "75",
+    "name": "Toru 08",
+    "character": "Toru",
+    "img": "../imgsc/Toru/emo_e20000100_5.png",
+    "color": "#50d0d0",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "76",
+    "name": "Toru 09",
+    "character": "Toru",
+    "img": "../imgsc/Toru/emo_e20000100_6.png",
+    "color": "#50d0d0",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "77",
+    "name": "Toru 10",
+    "character": "Toru",
+    "img": "../imgsc/Toru/emo_e20000100_7.png",
+    "color": "#50d0d0",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "78",
+    "name": "Toru 11",
+    "character": "Toru",
+    "img": "../imgsc/Toru/emo_e20000100_8.png",
+    "color": "#50d0d0",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "79",
+    "name": "Toru 12",
+    "character": "Toru",
+    "img": "../imgsc/Toru/emo_e20000100_945.png",
+    "color": "#50d0d0",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  },
+  {
+    "id": "80",
+    "name": "Yuika 00",
+    "character": "Yuika",
+    "img": "../imgsc/Yuika/yuika_01.png",
+    "color": "#3b91c4",
+    "defaultText": {
+      "text": "something",
+      "x": 148,
+      "y": 58,
+      "r": -2,
+      "s": 47
+    }
+  }
 ]

@@ -1,4 +1,4 @@
-/* eslint-env node */
+/* global process, __dirname */
 import fs from "fs";
 import path from "path";
 import readline from "readline";
@@ -62,7 +62,7 @@ async function main() {
     let scanRoot = process.argv[2];
     if (!scanRoot) {
       scanRoot = await question(
-        "请输入扫描根目录路径 (root dir with subfolders): "
+        "请输入扫描根目录路径 (root dir with subfolders): ",
       );
     }
     const rootDir = path.resolve(process.cwd(), scanRoot);
@@ -86,7 +86,7 @@ async function main() {
 
     for (const { name: characterName, full: dirPath } of subdirs) {
       const color = await question(
-        `为角色 ${characterName} 输入颜色 (e.g. #FFFFFF): `
+        `为角色 ${characterName} 输入颜色 (e.g. #FFFFFF): `,
       );
       const images = collectImages(dirPath);
       if (images.length === 0) {
@@ -125,12 +125,12 @@ async function main() {
 
     if (addedCount === 0) {
       console.warn(
-        "No entries added. Ensure subfolders contain supported image files."
+        "No entries added. Ensure subfolders contain supported image files.",
       );
     } else {
       fs.writeFileSync(charactersPath, JSON.stringify(charactersData, null, 4));
       console.log(
-        `Successfully added ${addedCount} entries to characters-sc.json`
+        `Successfully added ${addedCount} entries to characters-sc.json`,
       );
     }
   } catch (error) {

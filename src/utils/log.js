@@ -15,7 +15,7 @@ async function log(id, name, type) {
         headers: {
           "x-key": key,
         },
-      }
+      },
     );
     if (responce.data.key) {
       localStorage.setItem("x-key", responce.data.key);

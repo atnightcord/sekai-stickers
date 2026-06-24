@@ -3,16 +3,14 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
-    "./src/*.{js,ts,jsx,tsx}"
+    "./src/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     fontFamily: {
-      sans: ['SF Pro', 'sans-serif'],
-      serif: ['serif']
+      sans: ["SF Pro", "sans-serif"],
+      serif: ["serif"],
     },
-    extend: {
-    },
+    extend: {},
   },
   plugins: [],
-}
-
+};

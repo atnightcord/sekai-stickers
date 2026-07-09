@@ -1,5 +1,6 @@
 import "../assets/main.css";
 import Canvas from "../components/Canvas";
+import AdUnit from "../components/AdUnit";
 import { useState, useEffect, useRef, useMemo, useLayoutEffect } from "react";
 import { BlossomColorPicker } from "@dayflow/blossom-color-picker-react";
 import "@dayflow/blossom-color-picker/styles.css";
@@ -435,380 +436,404 @@ function App() {
             </div>
           </section>
 
-          <section className="controls-panel" aria-labelledby="controls-title">
-            <div className="w-full flex flex-row gap-4 justify-between items-center mb-6">
-              <div className="controls-panel-head !mb-0">
-                <p className="section-kicker">Controls</p>
-                <h2 id="controls-title">Tune the sticker</h2>
+          <div className="flex flex-col gap-6">
+            <section
+              className="controls-panel"
+              aria-labelledby="controls-title"
+            >
+              <div className="w-full flex flex-row gap-4 justify-between items-center mb-6">
+                <div className="controls-panel-head !mb-0">
+                  <p className="section-kicker">Controls</p>
+                  <h2 id="controls-title">Tune the sticker</h2>
+                </div>
+                <Button
+                  className="w-full"
+                  size="2"
+                  variant="soft"
+                  color="gray"
+                  onClick={resetSettings}
+                >
+                  Reset all
+                </Button>
               </div>
-              <Button
-                className="w-full"
-                size="2"
-                variant="soft"
-                color="gray"
-                onClick={resetSettings}
-              >
-                Reset all
-              </Button>
-            </div>
-            <div className="control-sections">
-              <section
-                className="control-section"
-                aria-labelledby="content-title"
-              >
-                <div className="control-section-head">
-                  <h3 id="content-title">Content</h3>
-                  <p>Choose a character and write the line.</p>
-                </div>
-
-                <div className="control-stack">
-                  <div className="picker">
-                    <Picker
-                      character={character}
-                      setCharacter={handleCharacterSelect}
-                    />
+              <div className="control-sections">
+                <section
+                  className="control-section"
+                  aria-labelledby="content-title"
+                >
+                  <div className="control-section-head">
+                    <h3 id="content-title">Content</h3>
+                    <p>Choose a character and write the line.</p>
                   </div>
 
-                  <div className="form-field text form-field--full">
-                    <label className="field-label" htmlFor="sticker-text">
-                      Sticker text
-                    </label>
-                    <TextArea
-                      id="sticker-text"
-                      ref={textAreaRef}
-                      size="2"
-                      rows={2}
-                      placeholder="Type the sticker text"
-                      value={text}
-                      onChange={(e) => {
-                        setText(e.target.value);
-                        syncTextAreaHeight(e.target);
-                      }}
-                      className="text-input"
-                    />
-                  </div>
-
-                  <div className="control-row">
-                    <label
-                      className="field-label field-label--inline"
-                      htmlFor="font-select"
-                    >
-                      Font
-                    </label>
-                    <Select.Root value={fontKey} onValueChange={setFontKey}>
-                      <Select.Trigger id="font-select" />
-                      <Select.Content>
-                        <Select.Item value="yuruka">YurukaStd</Select.Item>
-                        <Select.Item value="fangtang">SSFangTangTi</Select.Item>
-                        <Select.Item value="system">System Sans</Select.Item>
-                      </Select.Content>
-                    </Select.Root>
-                  </div>
-                </div>
-              </section>
-
-              <section
-                className="control-section"
-                aria-labelledby="layout-title"
-              >
-                <div className="control-section-head">
-                  <h3 id="layout-title">Layout</h3>
-                  <p>Shape the position, angle, and spacing.</p>
-                </div>
-
-                <div className="control-stack">
-                  <div className="slider-field">
-                    <div className="slider-field-head">
-                      <label className="field-label" htmlFor="rotate-slider">
-                        Rotate
-                      </label>
-                      <span>{rotate.toFixed(1)}°</span>
-                    </div>
-                    <Slider
-                      id="rotate-slider"
-                      value={[rotate]}
-                      onValueChange={([v]) => setRotate(v)}
-                      min={-10}
-                      max={10}
-                      step={0.2}
-                    />
-                  </div>
-
-                  <div className="slider-field">
-                    <div className="slider-field-head">
-                      <label className="field-label" htmlFor="font-size-slider">
-                        Font size
-                      </label>
-                      <span>{fontSize}px</span>
-                    </div>
-                    <Slider
-                      id="font-size-slider"
-                      value={[fontSize]}
-                      onValueChange={([v]) => setFontSize(v)}
-                      min={10}
-                      max={100}
-                      step={1}
-                    />
-                  </div>
-
-                  <div className="slider-field">
-                    <div className="slider-field-head">
-                      <label className="field-label" htmlFor="spacing-slider">
-                        Line spacing
-                      </label>
-                      <span>{spaceSize}px</span>
-                    </div>
-                    <Slider
-                      id="spacing-slider"
-                      value={[spaceSize]}
-                      onValueChange={([v]) => setSpaceSize(v)}
-                      min={18}
-                      max={100}
-                      step={1}
-                    />
-                  </div>
-
-                  <div className="slider-field">
-                    <div className="slider-field-head">
-                      <label
-                        className="field-label"
-                        htmlFor="letter-spacing-slider"
-                      >
-                        Letter spacing
-                      </label>
-                      <span>{letterSpacing}px</span>
-                    </div>
-                    <Slider
-                      id="letter-spacing-slider"
-                      value={[letterSpacing]}
-                      onValueChange={([v]) => setLetterSpacing(v)}
-                      min={-10}
-                      max={30}
-                      step={1}
-                    />
-                  </div>
-
-                  <div className="toggle-grid">
-                    <div className="toggle-row">
-                      <div>
-                        <label className="field-label" htmlFor="curve-toggle">
-                          Curve text
-                        </label>
-                        <p className="toggle-help">Wrap text around an arc.</p>
-                      </div>
-                      <Switch
-                        id="curve-toggle"
-                        checked={curve}
-                        onCheckedChange={setCurve}
+                  <div className="control-stack">
+                    <div className="picker">
+                      <Picker
+                        character={character}
+                        setCharacter={handleCharacterSelect}
                       />
                     </div>
 
-                    <div className="toggle-row">
-                      <div>
+                    <div className="form-field text form-field--full">
+                      <label className="field-label" htmlFor="sticker-text">
+                        Sticker text
+                      </label>
+                      <TextArea
+                        id="sticker-text"
+                        ref={textAreaRef}
+                        size="2"
+                        rows={2}
+                        placeholder="Type the sticker text"
+                        value={text}
+                        onChange={(e) => {
+                          setText(e.target.value);
+                          syncTextAreaHeight(e.target);
+                        }}
+                        className="text-input"
+                      />
+                    </div>
+
+                    <div className="control-row">
+                      <label
+                        className="field-label field-label--inline"
+                        htmlFor="font-select"
+                      >
+                        Font
+                      </label>
+                      <Select.Root value={fontKey} onValueChange={setFontKey}>
+                        <Select.Trigger id="font-select" />
+                        <Select.Content>
+                          <Select.Item value="yuruka">YurukaStd</Select.Item>
+                          <Select.Item value="fangtang">
+                            SSFangTangTi
+                          </Select.Item>
+                          <Select.Item value="system">System Sans</Select.Item>
+                        </Select.Content>
+                      </Select.Root>
+                    </div>
+                  </div>
+                </section>
+
+                <section
+                  className="control-section"
+                  aria-labelledby="layout-title"
+                >
+                  <div className="control-section-head">
+                    <h3 id="layout-title">Layout</h3>
+                    <p>Shape the position, angle, and spacing.</p>
+                  </div>
+
+                  <div className="control-stack">
+                    <div className="slider-field">
+                      <div className="slider-field-head">
+                        <label className="field-label" htmlFor="rotate-slider">
+                          Rotate
+                        </label>
+                        <span>{rotate.toFixed(1)}°</span>
+                      </div>
+                      <Slider
+                        id="rotate-slider"
+                        value={[rotate]}
+                        onValueChange={([v]) => setRotate(v)}
+                        min={-10}
+                        max={10}
+                        step={0.2}
+                      />
+                    </div>
+
+                    <div className="slider-field">
+                      <div className="slider-field-head">
                         <label
                           className="field-label"
-                          htmlFor="vertical-toggle"
+                          htmlFor="font-size-slider"
                         >
-                          Vertical text
+                          Font size
                         </label>
-                        <p className="toggle-help">
-                          Stack characters top to bottom.
-                        </p>
+                        <span>{fontSize}px</span>
                       </div>
-                      <Switch
-                        id="vertical-toggle"
-                        checked={vertical}
-                        onCheckedChange={setVertical}
+                      <Slider
+                        id="font-size-slider"
+                        value={[fontSize]}
+                        onValueChange={([v]) => setFontSize(v)}
+                        min={10}
+                        max={100}
+                        step={1}
                       />
                     </div>
 
-                    <div className="toggle-row">
+                    <div className="slider-field">
+                      <div className="slider-field-head">
+                        <label className="field-label" htmlFor="spacing-slider">
+                          Line spacing
+                        </label>
+                        <span>{spaceSize}px</span>
+                      </div>
+                      <Slider
+                        id="spacing-slider"
+                        value={[spaceSize]}
+                        onValueChange={([v]) => setSpaceSize(v)}
+                        min={18}
+                        max={100}
+                        step={1}
+                      />
+                    </div>
+
+                    <div className="slider-field">
+                      <div className="slider-field-head">
+                        <label
+                          className="field-label"
+                          htmlFor="letter-spacing-slider"
+                        >
+                          Letter spacing
+                        </label>
+                        <span>{letterSpacing}px</span>
+                      </div>
+                      <Slider
+                        id="letter-spacing-slider"
+                        value={[letterSpacing]}
+                        onValueChange={([v]) => setLetterSpacing(v)}
+                        min={-10}
+                        max={30}
+                        step={1}
+                      />
+                    </div>
+
+                    <div className="toggle-grid">
+                      <div className="toggle-row">
+                        <div>
+                          <label className="field-label" htmlFor="curve-toggle">
+                            Curve text
+                          </label>
+                          <p className="toggle-help">
+                            Wrap text around an arc.
+                          </p>
+                        </div>
+                        <Switch
+                          id="curve-toggle"
+                          checked={curve}
+                          onCheckedChange={setCurve}
+                        />
+                      </div>
+
+                      <div className="toggle-row">
+                        <div>
+                          <label
+                            className="field-label"
+                            htmlFor="vertical-toggle"
+                          >
+                            Vertical text
+                          </label>
+                          <p className="toggle-help">
+                            Stack characters top to bottom.
+                          </p>
+                        </div>
+                        <Switch
+                          id="vertical-toggle"
+                          checked={vertical}
+                          onCheckedChange={setVertical}
+                        />
+                      </div>
+
+                      <div className="toggle-row">
+                        <div>
+                          <label
+                            className="field-label"
+                            htmlFor="behind-toggle"
+                          >
+                            Text behind image
+                          </label>
+                          <p className="toggle-help">
+                            Place the sticker in front of the text.
+                          </p>
+                        </div>
+                        <Switch
+                          id="behind-toggle"
+                          checked={textBehind}
+                          onCheckedChange={setTextBehind}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <section
+                  className="control-section"
+                  aria-labelledby="style-title"
+                >
+                  <div className="control-section-head">
+                    <h3 id="style-title">Style</h3>
+                    <p>Control color, outline, and custom artwork.</p>
+                  </div>
+
+                  <div className="control-stack">
+                    <div className="slider-field">
+                      <div className="slider-field-head">
+                        <label
+                          className="field-label"
+                          htmlFor="stroke-width-slider"
+                        >
+                          Stroke width
+                        </label>
+                        <span>{strokeWidth}px</span>
+                      </div>
+                      <Slider
+                        id="stroke-width-slider"
+                        value={[strokeWidth]}
+                        onValueChange={([v]) => setStrokeWidth(v)}
+                        min={0}
+                        max={30}
+                        step={0.5}
+                      />
+                    </div>
+
+                    <div className="control-row control-row--color">
                       <div>
-                        <label className="field-label" htmlFor="behind-toggle">
-                          Text behind image
+                        <label className="field-label" htmlFor="text-color">
+                          Text color
                         </label>
                         <p className="toggle-help">
-                          Place the sticker in front of the text.
+                          Use the character accent or pick your own.
                         </p>
                       </div>
-                      <Switch
-                        id="behind-toggle"
-                        checked={textBehind}
-                        onCheckedChange={setTextBehind}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              <section
-                className="control-section"
-                aria-labelledby="style-title"
-              >
-                <div className="control-section-head">
-                  <h3 id="style-title">Style</h3>
-                  <p>Control color, outline, and custom artwork.</p>
-                </div>
-
-                <div className="control-stack">
-                  <div className="slider-field">
-                    <div className="slider-field-head">
-                      <label
-                        className="field-label"
-                        htmlFor="stroke-width-slider"
-                      >
-                        Stroke width
-                      </label>
-                      <span>{strokeWidth}px</span>
-                    </div>
-                    <Slider
-                      id="stroke-width-slider"
-                      value={[strokeWidth]}
-                      onValueChange={([v]) => setStrokeWidth(v)}
-                      min={0}
-                      max={30}
-                      step={0.5}
-                    />
-                  </div>
-
-                  <div className="control-row control-row--color">
-                    <div>
-                      <label className="field-label" htmlFor="text-color">
-                        Text color
-                      </label>
-                      <p className="toggle-help">
-                        Use the character accent or pick your own.
-                      </p>
-                    </div>
-                    <div className="color-control-group">
-                      <BlossomColorPicker
-                        className="blossom-color-field"
-                        value={textBlossomValue}
-                        onChange={(c) => setTextColor(c.hex)}
-                        showAlphaSlider={false}
-                        coreSize={30}
-                        petalSize={28}
-                        adaptivePositioning
-                        aria-label="Text color"
-                      />
-                      <Button
-                        size="2"
-                        variant="soft"
-                        color="gray"
-                        onClick={() => setTextColor(character.color)}
-                      >
-                        Reset
-                      </Button>
-                    </div>
-                  </div>
-
-                  <div className="control-row control-row--color">
-                    <div>
-                      <label className="field-label" htmlFor="stroke-color">
-                        Stroke color
-                      </label>
-                      <p className="toggle-help">
-                        Outline color for better contrast.
-                      </p>
-                    </div>
-                    <div className="color-control-group">
-                      <BlossomColorPicker
-                        className="blossom-color-field"
-                        value={strokeBlossomValue}
-                        onChange={(c) => setStrokeColor(c.hex)}
-                        showAlphaSlider={false}
-                        coreSize={30}
-                        petalSize={28}
-                        adaptivePositioning
-                        aria-label="Stroke color"
-                      />
-                      <Button
-                        size="2"
-                        variant="soft"
-                        color="gray"
-                        onClick={() => setStrokeColor("#ffffff")}
-                      >
-                        Reset
-                      </Button>
-                    </div>
-                  </div>
-
-                  <div className="control-row control-row--upload">
-                    <div>
-                      <label className="field-label" htmlFor="custom-image">
-                        Custom image
-                      </label>
-                      <p className="toggle-help">
-                        Replace the character art with your own image.
-                      </p>
-                    </div>
-                    <div className="upload-control-group">
-                      <input
-                        id="custom-image"
-                        ref={fileInputRef}
-                        type="file"
-                        accept="image/*"
-                        onChange={handleUpload}
-                        aria-label="Custom image upload"
-                        style={{ display: "none" }}
-                      />
-                      <Button
-                        size="2"
-                        variant="soft"
-                        color="gray"
-                        onClick={triggerUpload}
-                      >
-                        Upload
-                      </Button>
-                      {customImage && (
+                      <div className="color-control-group">
+                        <BlossomColorPicker
+                          className="blossom-color-field"
+                          value={textBlossomValue}
+                          onChange={(c) => setTextColor(c.hex)}
+                          showAlphaSlider={false}
+                          coreSize={30}
+                          petalSize={28}
+                          adaptivePositioning
+                          aria-label="Text color"
+                        />
                         <Button
                           size="2"
                           variant="soft"
                           color="gray"
-                          onClick={clearUpload}
+                          onClick={() => setTextColor(character.color)}
                         >
-                          Clear
+                          Reset
                         </Button>
-                      )}
+                      </div>
+                    </div>
+
+                    <div className="control-row control-row--color">
+                      <div>
+                        <label className="field-label" htmlFor="stroke-color">
+                          Stroke color
+                        </label>
+                        <p className="toggle-help">
+                          Outline color for better contrast.
+                        </p>
+                      </div>
+                      <div className="color-control-group">
+                        <BlossomColorPicker
+                          className="blossom-color-field"
+                          value={strokeBlossomValue}
+                          onChange={(c) => setStrokeColor(c.hex)}
+                          showAlphaSlider={false}
+                          coreSize={30}
+                          petalSize={28}
+                          adaptivePositioning
+                          aria-label="Stroke color"
+                        />
+                        <Button
+                          size="2"
+                          variant="soft"
+                          color="gray"
+                          onClick={() => setStrokeColor("#ffffff")}
+                        >
+                          Reset
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="control-row control-row--upload">
+                      <div>
+                        <label className="field-label" htmlFor="custom-image">
+                          Custom image
+                        </label>
+                        <p className="toggle-help">
+                          Replace the character art with your own image.
+                        </p>
+                      </div>
+                      <div className="upload-control-group">
+                        <input
+                          id="custom-image"
+                          ref={fileInputRef}
+                          type="file"
+                          accept="image/*"
+                          onChange={handleUpload}
+                          aria-label="Custom image upload"
+                          style={{ display: "none" }}
+                        />
+                        <Button
+                          size="2"
+                          variant="soft"
+                          color="gray"
+                          onClick={triggerUpload}
+                        >
+                          Upload
+                        </Button>
+                        {customImage && (
+                          <Button
+                            size="2"
+                            variant="soft"
+                            color="gray"
+                            onClick={clearUpload}
+                          >
+                            Clear
+                          </Button>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </section>
+                </section>
 
-              <section
-                className="control-section export-section"
-                aria-labelledby="export-title"
-              >
-                <div className="control-section-head">
-                  <h3 id="export-title">Export</h3>
-                  <p>Copy fast on mobile, or save a file locally.</p>
-                </div>
+                <section
+                  className="control-section export-section"
+                  aria-labelledby="export-title"
+                >
+                  <div className="control-section-head">
+                    <h3 id="export-title">Export</h3>
+                    <p>Copy fast on mobile, or save a file locally.</p>
+                  </div>
 
-                <div className="export-grid">
-                  <Button size="3" onClick={copy}>
-                    Copy PNG
-                  </Button>
-                  <Button size="3" variant="soft" onClick={copyWithBg}>
-                    Copy JPG
-                  </Button>
-                  <Button size="3" variant="soft" onClick={download}>
-                    Save PNG
-                  </Button>
-                  <Button size="3" variant="soft" onClick={downloadJpg}>
-                    Save JPG
-                  </Button>
-                  <Button
-                    className="export-wide"
-                    size="3"
-                    variant="soft"
-                    onClick={downloadWebp}
-                  >
-                    Save WEBP
-                  </Button>
-                </div>
-              </section>
-            </div>
-          </section>
+                  <div className="export-grid">
+                    <Button size="3" onClick={copy}>
+                      Copy PNG
+                    </Button>
+                    <Button size="3" variant="soft" onClick={copyWithBg}>
+                      Copy JPG
+                    </Button>
+                    <Button size="3" variant="soft" onClick={download}>
+                      Save PNG
+                    </Button>
+                    <Button size="3" variant="soft" onClick={downloadJpg}>
+                      Save JPG
+                    </Button>
+                    <Button
+                      className="export-wide"
+                      size="3"
+                      variant="soft"
+                      onClick={downloadWebp}
+                    >
+                      Save WEBP
+                    </Button>
+                  </div>
+                </section>
+              </div>
+            </section>
+            <section
+              className="control-section ad-section"
+              aria-label="Advertisement"
+            >
+              <AdUnit
+                adSlot={import.meta.env.VITE_ADSENSE_SLOT}
+                style={{ minHeight: 100 }}
+              />
+            </section>
+          </div>
         </div>
       </div>
 

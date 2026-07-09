@@ -33,8 +33,8 @@
       property="og:description"
       content="Create custom Project Sekai sticker images with your own text. Choose from 50+ characters, customize fonts, colors, and positioning."
     />
-    <meta property="og:image" content="https://st.ayaka.one/og-image.png" />
-    <meta property="og:url" content="https://st.ayaka.one" />
+    <meta property="og:image" content="https://st.3kn.jp/og-image.png" />
+    <meta property="og:url" content="https://st.3kn.jp" />
     <meta property="og:site_name" content="Sekai Stickers" />
     <meta property="og:type" content="website" />
     <!-- Twitter -->
@@ -47,14 +47,14 @@
       name="twitter:description"
       content="Create custom Project Sekai sticker images with your own text. Choose from 50+ characters, customize fonts, colors, and positioning."
     />
-    <meta name="twitter:image" content="https://st.ayaka.one/og-image.png" />
+    <meta name="twitter:image" content="https://st.3kn.jp/og-image.png" />
     <!-- Structured Data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "Sekai Stickers",
-        "url": "https://st.ayaka.one",
+        "url": "https://st.3kn.jp/",
         "description": "Create custom Project Sekai sticker images with your own text. Choose from 50+ characters, customize fonts, colors, and positioning.",
         "applicationCategory": "Entertainment",
         "operatingSystem": "Any",
@@ -63,13 +63,19 @@
           "price": "0",
           "priceCurrency": "USD"
         },
-        "image": "https://st.ayaka.one/og-image.png"
+        "image": "https://st.3kn.jp/og-image.png"
       }
     </script>
+    <!-- Google AdSense -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=%VITE_ADSENSE_CLIENT%"
+      crossorigin="anonymous"
+    ></script>
     <!-- Google tag (gtag.js) -->
     <script
       async
-      src="https://www.googletagmanager.com/gtag/js?id=G-6CP9BRMT77"
+      src="https://www.googletagmanager.com/gtag/js?id=%VITE_GA_ID%"
     ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -78,7 +84,7 @@
       }
       gtag("js", new Date());
 
-      gtag("config", "G-6CP9BRMT77");
+      gtag("config", "%VITE_GA_ID%");
     </script>
   </head>
   <body>

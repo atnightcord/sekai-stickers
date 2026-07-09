@@ -190,6 +190,14 @@
   width: 100%;
   height: auto;
   border-radius: 0;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.canvas canvas:active {
+  cursor: grabbing;
 }
 
 .canvas-loading {
@@ -356,11 +364,69 @@
   object-fit: cover;
 }
 
+.color-picker-triggers {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
 .blossom-color-field {
   flex: none;
   min-height: 2.75rem;
   display: flex;
   align-items: center;
+}
+
+.native-color-input {
+  width: 100%;
+  height: 3.25rem;
+  box-sizing: border-box;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  padding: 0.25rem;
+  cursor: pointer;
+}
+
+.native-color-input::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.native-color-input::-webkit-color-swatch {
+  border: 0;
+}
+
+.native-color-input--hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+  pointer-events: none;
+}
+
+.hex-input-field {
+  display: grid;
+  flex: 1 1 9rem;
+  gap: 0.4rem;
+}
+
+.hex-color-input {
+  width: 100%;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.hex-color-input input {
+  cursor: pointer;
 }
 
 .picker {

@@ -1,13 +1,12 @@
 import "../assets/main.css";
+import "@dayflow/blossom-color-picker/styles.css";
 import Canvas from "../components/Canvas";
 import AdUnit from "../components/AdUnit";
-import { useState, useEffect, useRef, useMemo, useLayoutEffect } from "react";
-import { BlossomColorPicker } from "@dayflow/blossom-color-picker-react";
-import "@dayflow/blossom-color-picker/styles.css";
-import { hexToBlossomValue } from "../utils/blossomColor";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import defaultCharacter from "../defaultCharacter";
 import Picker from "../components/Picker";
 import Info from "../components/Info";
+import ColorControl from "../components/ColorControl";
 import log from "../utils/log";
 import { Button, Switch, Select, Slider, TextArea } from "@radix-ui/themes";
 
@@ -41,20 +40,10 @@ function App() {
   const [fontKey, setFontKey] = useState(DEFAULT_FONT_KEY);
   const [textBehind, setTextBehind] = useState(false);
   const [letterSpacing, setLetterSpacing] = useState(0);
-  const isDragging = useRef(false);
-  const lastPos = useRef({ x: 0, y: 0 });
+  const dragState = useRef(null);
   const fileInputRef = useRef(null);
   const imgRef = useRef(null);
   const textAreaRef = useRef(null);
-
-  const textBlossomValue = useMemo(
-    () => hexToBlossomValue(textColor),
-    [textColor],
-  );
-  const strokeBlossomValue = useMemo(
-    () => hexToBlossomValue(strokeColor),
-    [strokeColor],
-  );
 
   const applyCharacterDefaults = (selectedCharacter) => {
     setText(selectedCharacter.defaultText.text);
@@ -103,40 +92,65 @@ function App() {
     if (fileInputRef.current) fileInputRef.current.click();
   };
 
-  const getPoint = (e) => {
-    if (e.touches && e.touches[0]) {
-      return { x: e.touches[0].clientX, y: e.touches[0].clientY };
-    }
-    return { x: e.clientX, y: e.clientY };
-  };
-
   const handlePointerDown = (e) => {
-    const { x, y } = getPoint(e);
-    isDragging.current = true;
-    lastPos.current = { x, y };
+    if (e.button !== 0) return;
+
+    const canvas = e.currentTarget;
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+
+    dragState.current = {
+      pointerId: e.pointerId,
+      startClientX: e.clientX,
+      startClientY: e.clientY,
+      startPositionX: position.x,
+      startPositionY: position.y,
+      scaleX: canvas.width / rect.width,
+      scaleY: canvas.height / rect.height,
+    };
+
+    canvas.setPointerCapture(e.pointerId);
     if (e.cancelable) {
       e.preventDefault();
     }
   };
 
   const handlePointerMove = (e) => {
-    if (!isDragging.current) return;
-    const { x, y } = getPoint(e);
-    const dx = x - lastPos.current.x;
-    const dy = y - lastPos.current.y;
-    if (dx !== 0 || dy !== 0) {
-      setPosition((prev) => ({ x: prev.x + dx, y: prev.y + dy }));
-      lastPos.current = { x, y };
-    }
+    const drag = dragState.current;
+    if (!drag || drag.pointerId !== e.pointerId) return;
+
+    setPosition({
+      x: drag.startPositionX + (e.clientX - drag.startClientX) * drag.scaleX,
+      y: drag.startPositionY + (e.clientY - drag.startClientY) * drag.scaleY,
+    });
+
     if (e.cancelable) {
       e.preventDefault();
     }
   };
 
   const handlePointerUp = (e) => {
-    isDragging.current = false;
-    if (e && e.cancelable) {
+    const drag = dragState.current;
+    if (!drag || drag.pointerId !== e.pointerId) return;
+
+    dragState.current = null;
+    if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    }
+    if (e.cancelable) {
       e.preventDefault();
+    }
+  };
+
+  const handlePointerCancel = (e) => {
+    if (dragState.current?.pointerId === e.pointerId) {
+      dragState.current = null;
+    }
+  };
+
+  const handleLostPointerCapture = (e) => {
+    if (dragState.current?.pointerId === e.pointerId) {
+      dragState.current = null;
     }
   };
 
@@ -397,7 +411,8 @@ function App() {
                       onPointerDown={handlePointerDown}
                       onPointerMove={handlePointerMove}
                       onPointerUp={handlePointerUp}
-                      onPointerLeave={handlePointerUp}
+                      onPointerCancel={handlePointerCancel}
+                      onLostPointerCapture={handleLostPointerCapture}
                     />
                     {!loaded && (
                       <div className="canvas-loading">Loading sticker…</div>
@@ -696,15 +711,10 @@ function App() {
                         </p>
                       </div>
                       <div className="color-control-group">
-                        <BlossomColorPicker
-                          className="blossom-color-field"
-                          value={textBlossomValue}
-                          onChange={(c) => setTextColor(c.hex)}
-                          showAlphaSlider={false}
-                          coreSize={30}
-                          petalSize={28}
-                          adaptivePositioning
-                          aria-label="Text color"
+                        <ColorControl
+                          color={textColor}
+                          label="Text color"
+                          onChange={setTextColor}
                         />
                         <Button
                           size="2"
@@ -727,15 +737,10 @@ function App() {
                         </p>
                       </div>
                       <div className="color-control-group">
-                        <BlossomColorPicker
-                          className="blossom-color-field"
-                          value={strokeBlossomValue}
-                          onChange={(c) => setStrokeColor(c.hex)}
-                          showAlphaSlider={false}
-                          coreSize={30}
-                          petalSize={28}
-                          adaptivePositioning
-                          aria-label="Stroke color"
+                        <ColorControl
+                          color={strokeColor}
+                          label="Stroke color"
+                          onChange={setStrokeColor}
                         />
                         <Button
                           size="2"

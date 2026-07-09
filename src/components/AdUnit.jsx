@@ -9,7 +9,7 @@ export default function AdUnit({ adSlot, adFormat = "auto", style = {} }) {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     } catch (e) {
-      // adsbygoogle not yet loaded
+      console.log("AdSense error:", e);
     }
   }, []);
 

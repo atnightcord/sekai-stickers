@@ -397,61 +397,73 @@ function App() {
         </header>
 
         <div className="workspace-grid">
-          <section className="preview-panel" aria-labelledby="preview-title">
-            <div className="preview-stage">
-              <div className="axis-grid">
-                <div className="axis-grid-canvas">
-                  <div
-                    className="canvas"
-                    role="img"
-                    aria-label="Sticker preview canvas"
-                  >
-                    <Canvas
-                      draw={draw}
-                      onPointerDown={handlePointerDown}
-                      onPointerMove={handlePointerMove}
-                      onPointerUp={handlePointerUp}
-                      onPointerCancel={handlePointerCancel}
-                      onLostPointerCapture={handleLostPointerCapture}
-                    />
-                    {!loaded && (
-                      <div className="canvas-loading">Loading sticker…</div>
-                    )}
+          <div className="preview-rail">
+            <section className="preview-panel" aria-labelledby="preview-title">
+              <div className="preview-stage">
+                <div className="axis-grid">
+                  <div className="axis-grid-canvas">
+                    <div
+                      className="canvas"
+                      role="img"
+                      aria-label="Sticker preview canvas"
+                    >
+                      <Canvas
+                        draw={draw}
+                        onPointerDown={handlePointerDown}
+                        onPointerMove={handlePointerMove}
+                        onPointerUp={handlePointerUp}
+                        onPointerCancel={handlePointerCancel}
+                        onLostPointerCapture={handleLostPointerCapture}
+                      />
+                      {!loaded && (
+                        <div className="canvas-loading">Loading sticker…</div>
+                      )}
+                    </div>
                   </div>
+
+                  <Slider
+                    className="slider-vertical"
+                    value={[
+                      curve ? 256 - position.y + fontSize * 3 : 256 - position.y,
+                    ]}
+                    onValueChange={([v]) =>
+                      setPosition({
+                        ...position,
+                        y: curve ? 256 + fontSize * 3 - v : 256 - v,
+                      })
+                    }
+                    min={0}
+                    max={256}
+                    step={1}
+                    orientation="vertical"
+                  />
+
+                  <Slider
+                    className="slider-horizontal"
+                    value={[position.x]}
+                    onValueChange={([v]) => setPosition({ ...position, x: v })}
+                    min={0}
+                    max={296}
+                    step={1}
+                  />
+
+                  <div className="axis-grid-empty" />
                 </div>
-
-                <Slider
-                  className="slider-vertical"
-                  value={[
-                    curve ? 256 - position.y + fontSize * 3 : 256 - position.y,
-                  ]}
-                  onValueChange={([v]) =>
-                    setPosition({
-                      ...position,
-                      y: curve ? 256 + fontSize * 3 - v : 256 - v,
-                    })
-                  }
-                  min={0}
-                  max={256}
-                  step={1}
-                  orientation="vertical"
-                />
-
-                <Slider
-                  className="slider-horizontal"
-                  value={[position.x]}
-                  onValueChange={([v]) => setPosition({ ...position, x: v })}
-                  min={0}
-                  max={296}
-                  step={1}
-                />
-
-                <div className="axis-grid-empty" />
               </div>
-            </div>
-          </section>
+            </section>
 
-          <div className="flex flex-col gap-6">
+            <section
+              className="control-section ad-section"
+              aria-label="Advertisement"
+            >
+              <AdUnit
+                adSlot={import.meta.env.VITE_ADSENSE_SLOT}
+                style={{ minHeight: 100 }}
+              />
+            </section>
+          </div>
+
+          <div className="controls-column">
             <section
               className="controls-panel"
               aria-labelledby="controls-title"
@@ -828,15 +840,6 @@ function App() {
                   </div>
                 </section>
               </div>
-            </section>
-            <section
-              className="control-section ad-section"
-              aria-label="Advertisement"
-            >
-              <AdUnit
-                adSlot={import.meta.env.VITE_ADSENSE_SLOT}
-                style={{ minHeight: 100 }}
-              />
             </section>
           </div>
         </div>

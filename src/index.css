@@ -42,7 +42,8 @@ body,
 
 body {
   margin: 0;
-  color-scheme: light;
+  color-scheme: light dark;
+  background: var(--bg, #fff8fd);
   font-family:
     "SF Pro",
     system-ui,

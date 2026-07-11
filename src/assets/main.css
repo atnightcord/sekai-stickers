@@ -12,10 +12,48 @@
   --brand-soft: #ffe4f1;
   --shadow-sm: 0 10px 24px rgba(112, 36, 100, 0.08);
   --shadow-md: 0 20px 50px rgba(112, 36, 100, 0.14);
+  --panel-border: rgba(220, 181, 217, 0.75);
+  --panel-bg: rgba(255, 255, 255, 0.94);
+  --section-bg-start: rgba(255, 255, 255, 0.98);
+  --section-bg-end: rgba(255, 244, 249, 0.74);
+  --field-bg: rgba(255, 255, 255, 0.92);
+  --picker-bg-end: rgba(255, 244, 249, 0.84);
+  --thumb-outline: #ffffff;
+  --mobile-bar-border: rgba(220, 181, 217, 0.7);
+  --mobile-bar-bg: rgba(255, 250, 255, 0.92);
+  --scrollbar-thumb: rgba(197, 86, 147, 0.5);
   --radius-sm: 0;
   --radius-md: 0;
   --radius-lg: 0;
   --app-max: 1180px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #151116;
+    --surface: #241d24;
+    --surface-soft: #2b222a;
+    --surface-strong: #352934;
+    --ink: #f8eef6;
+    --ink-soft: #cbb9c8;
+    --border: #4a3947;
+    --border-strong: #654d60;
+    --brand: #e479b2;
+    --brand-strong: #f39ac8;
+    --brand-soft: #49273b;
+    --shadow-sm: 0 10px 24px rgba(0, 0, 0, 0.24);
+    --shadow-md: 0 20px 50px rgba(0, 0, 0, 0.34);
+    --panel-border: rgba(113, 82, 105, 0.78);
+    --panel-bg: rgba(34, 27, 34, 0.96);
+    --section-bg-start: rgba(43, 34, 42, 0.98);
+    --section-bg-end: rgba(34, 27, 34, 0.92);
+    --field-bg: rgba(45, 35, 44, 0.94);
+    --picker-bg-end: rgba(39, 30, 38, 0.96);
+    --thumb-outline: #241d24;
+    --mobile-bar-border: rgba(113, 82, 105, 0.72);
+    --mobile-bar-bg: rgba(26, 20, 26, 0.92);
+    --scrollbar-thumb: rgba(228, 121, 178, 0.55);
+  }
 }
 
 .App {
@@ -35,7 +73,7 @@
 
 .app-shell {
   min-height: 100vh;
-  background: #ffffff;
+  background: var(--bg);
   color: var(--ink);
   font-family:
     "SF Pro",
@@ -111,9 +149,9 @@
 
 .preview-panel,
 .controls-panel {
-  border: 1px solid rgba(220, 181, 217, 0.75);
+  border: 1px solid var(--panel-border);
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.94);
+  background: var(--panel-bg);
 }
 
 .preview-panel {
@@ -250,7 +288,7 @@
   height: 10px;
   border-radius: 0;
   background: var(--brand);
-  border: 2px solid #fff;
+  border: 2px solid var(--thumb-outline);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
 }
 
@@ -276,7 +314,7 @@
   height: 10px;
   border-radius: 0;
   background: var(--brand);
-  border: 2px solid #fff;
+  border: 2px solid var(--thumb-outline);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
 }
 
@@ -296,8 +334,8 @@
   border-radius: var(--radius-md);
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.98),
-    rgba(255, 244, 249, 0.74)
+    var(--section-bg-start),
+    var(--section-bg-end)
   );
 }
 
@@ -312,9 +350,9 @@
 .control-row,
 .toggle-row {
   padding: 0.85rem 0.95rem;
-  border: 1px solid rgba(220, 181, 217, 0.75);
+  border: 1px solid var(--panel-border);
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--field-bg);
 }
 
 .field-label {
@@ -487,12 +525,12 @@
 
 .picker-char-btn {
   cursor: pointer;
-  border: 1px solid rgba(220, 181, 217, 0.8);
+  border: 1px solid var(--panel-border);
   padding: 0.35rem;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.98),
-    rgba(255, 244, 249, 0.84)
+    var(--section-bg-start),
+    var(--picker-bg-end)
   );
   border-radius: 0;
   overflow: hidden;
@@ -549,8 +587,8 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.75rem;
   padding: 0.85rem 0.75rem calc(0.85rem + env(safe-area-inset-bottom));
-  border-top: 1px solid rgba(220, 181, 217, 0.7);
-  background: rgba(255, 250, 255, 0.92);
+  border-top: 1px solid var(--mobile-bar-border);
+  background: var(--mobile-bar-bg);
   backdrop-filter: blur(18px);
 }
 
@@ -564,7 +602,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(197, 86, 147, 0.5);
+  background-color: var(--scrollbar-thumb);
   border-radius: 0;
   min-height: 2rem;
 }

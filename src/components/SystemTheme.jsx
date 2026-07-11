@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import { Theme } from "@radix-ui/themes";
+import {
+  createCharacterAccentStyle,
+  resolveRadixAccentColor,
+} from "../utils/themeAccent";
 
 const SYSTEM_DARK_MODE_QUERY = "(prefers-color-scheme: dark)";
 
@@ -8,7 +12,7 @@ function getSystemAppearance() {
   return window.matchMedia(SYSTEM_DARK_MODE_QUERY).matches ? "dark" : "light";
 }
 
-export default function SystemTheme({ children }) {
+export default function SystemTheme({ accentColor, children }) {
   const [appearance, setAppearance] = useState(getSystemAppearance);
 
   useEffect(() => {
@@ -28,9 +32,10 @@ export default function SystemTheme({ children }) {
   return (
     <Theme
       appearance={appearance}
-      accentColor="pink"
+      accentColor={resolveRadixAccentColor(accentColor)}
       grayColor="mauve"
       radius="none"
+      style={createCharacterAccentStyle(accentColor, appearance)}
     >
       {children}
     </Theme>

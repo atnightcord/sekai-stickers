@@ -7,6 +7,7 @@ import defaultCharacter from "../defaultCharacter";
 import Picker from "../components/Picker";
 import Info from "../components/Info";
 import ColorControl from "../components/ColorControl";
+import SystemTheme from "../components/SystemTheme";
 import log from "../utils/log";
 import { Button, Switch, Select, Slider, TextArea } from "@radix-ui/themes";
 
@@ -385,7 +386,8 @@ function App() {
   };
 
   return (
-    <main className="app-shell">
+    <SystemTheme accentColor={character.color}>
+      <main className="app-shell">
       <div className="app-chrome">
         <header className="app-header">
           <div className="app-header-copy">
@@ -853,7 +855,8 @@ function App() {
           Save PNG
         </Button>
       </div>
-    </main>
+      </main>
+    </SystemTheme>
   );
 }
 

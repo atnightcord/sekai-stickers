@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Theme } from "@radix-ui/themes";
 import {
   createCharacterAccentStyle,
@@ -14,6 +14,10 @@ function getSystemAppearance() {
 
 export default function SystemTheme({ accentColor, children }) {
   const [appearance, setAppearance] = useState(getSystemAppearance);
+  const characterAccentStyle = useMemo(
+    () => createCharacterAccentStyle(accentColor, appearance),
+    [accentColor, appearance],
+  );
 
   useEffect(() => {
     if (!window.matchMedia) return undefined;
@@ -29,13 +33,26 @@ export default function SystemTheme({ accentColor, children }) {
     return () => mediaQuery.removeEventListener("change", updateAppearance);
   }, []);
 
+  useEffect(() => {
+    const root = document.documentElement;
+    const property = "--scrollbar-thumb";
+    const previousColor = root.style.getPropertyValue(property);
+
+    root.style.setProperty(property, characterAccentStyle[property]);
+
+    return () => {
+      if (previousColor) root.style.setProperty(property, previousColor);
+      else root.style.removeProperty(property);
+    };
+  }, [characterAccentStyle]);
+
   return (
     <Theme
       appearance={appearance}
       accentColor={resolveRadixAccentColor(accentColor)}
       grayColor="mauve"
       radius="none"
-      style={createCharacterAccentStyle(accentColor, appearance)}
+      style={characterAccentStyle}
     >
       {children}
     </Theme>

@@ -601,6 +601,10 @@
   height: 0.5rem;
 }
 
+html {
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+
 ::-webkit-scrollbar-thumb {
   background-color: var(--scrollbar-thumb);
   border-radius: 0;

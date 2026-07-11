@@ -2,13 +2,22 @@ import "../assets/main.css";
 import "@dayflow/blossom-color-picker/styles.css";
 import Canvas from "../components/Canvas";
 import AdUnit from "../components/AdUnit";
-import { useState, useEffect, useRef, useLayoutEffect } from "react";
-import defaultCharacter from "../defaultCharacter";
+import {
+  useState,
+  useEffect,
+  useMemo,
+  useRef,
+  useLayoutEffect,
+} from "react";
 import Picker from "../components/Picker";
 import Info from "../components/Info";
 import ColorControl from "../components/ColorControl";
 import SystemTheme from "../components/SystemTheme";
 import log from "../utils/log";
+import {
+  loadPersistedEditorState,
+  savePersistedEditorState,
+} from "../utils/editorPersistence";
 import { Button, Switch, Select, Slider, TextArea } from "@radix-ui/themes";
 
 const { ClipboardItem } = window;
@@ -22,29 +31,91 @@ const FONT_STACKS = {
 const DEFAULT_FONT_KEY = "yuruka";
 
 function App() {
-  const [character, setCharacter] = useState(defaultCharacter);
-  const [text, setText] = useState(character.defaultText.text);
-  const [position, setPosition] = useState({
-    x: character.defaultText.x,
-    y: character.defaultText.y,
-  });
-  const [fontSize, setFontSize] = useState(character.defaultText.s);
-  const [spaceSize, setSpaceSize] = useState(25);
-  const [rotate, setRotate] = useState(character.defaultText.r);
-  const [curve, setCurve] = useState(false);
-  const [vertical, setVertical] = useState(false);
-  const [textColor, setTextColor] = useState(character.color);
-  const [strokeWidth, setStrokeWidth] = useState(DEFAULT_STROKE_WIDTH);
-  const [strokeColor, setStrokeColor] = useState("#ffffff");
+  const [initialEditorState] = useState(loadPersistedEditorState);
+  const [character, setCharacter] = useState(initialEditorState.character);
+  const [text, setText] = useState(initialEditorState.text);
+  const [position, setPosition] = useState(initialEditorState.position);
+  const [fontSize, setFontSize] = useState(initialEditorState.fontSize);
+  const [spaceSize, setSpaceSize] = useState(initialEditorState.spaceSize);
+  const [rotate, setRotate] = useState(initialEditorState.rotate);
+  const [curve, setCurve] = useState(initialEditorState.curve);
+  const [vertical, setVertical] = useState(initialEditorState.vertical);
+  const [textColor, setTextColor] = useState(initialEditorState.textColor);
+  const [strokeWidth, setStrokeWidth] = useState(
+    initialEditorState.strokeWidth,
+  );
+  const [strokeColor, setStrokeColor] = useState(
+    initialEditorState.strokeColor,
+  );
   const [loaded, setLoaded] = useState(false);
   const [customImage, setCustomImage] = useState(null);
-  const [fontKey, setFontKey] = useState(DEFAULT_FONT_KEY);
-  const [textBehind, setTextBehind] = useState(false);
-  const [letterSpacing, setLetterSpacing] = useState(0);
+  const [fontKey, setFontKey] = useState(initialEditorState.fontKey);
+  const [textBehind, setTextBehind] = useState(
+    initialEditorState.textBehind,
+  );
+  const [letterSpacing, setLetterSpacing] = useState(
+    initialEditorState.letterSpacing,
+  );
   const dragState = useRef(null);
   const fileInputRef = useRef(null);
   const imgRef = useRef(null);
   const textAreaRef = useRef(null);
+  const persistenceSnapshotRef = useRef(null);
+
+  const persistenceSnapshot = useMemo(
+    () => ({
+      character,
+      customImageActive: customImage !== null,
+      text,
+      position,
+      fontSize,
+      spaceSize,
+      rotate,
+      curve,
+      vertical,
+      textColor,
+      strokeWidth,
+      strokeColor,
+      fontKey,
+      textBehind,
+      letterSpacing,
+    }),
+    [
+      character,
+      customImage,
+      text,
+      position,
+      fontSize,
+      spaceSize,
+      rotate,
+      curve,
+      vertical,
+      textColor,
+      strokeWidth,
+      strokeColor,
+      fontKey,
+      textBehind,
+      letterSpacing,
+    ],
+  );
+
+  useEffect(() => {
+    persistenceSnapshotRef.current = persistenceSnapshot;
+    const saveTimer = window.setTimeout(() => {
+      savePersistedEditorState(persistenceSnapshot);
+    }, 200);
+
+    return () => window.clearTimeout(saveTimer);
+  }, [persistenceSnapshot]);
+
+  useEffect(() => {
+    const saveLatestState = () => {
+      savePersistedEditorState(persistenceSnapshotRef.current);
+    };
+
+    window.addEventListener("pagehide", saveLatestState);
+    return () => window.removeEventListener("pagehide", saveLatestState);
+  }, []);
 
   const applyCharacterDefaults = (selectedCharacter) => {
     setText(selectedCharacter.defaultText.text);
